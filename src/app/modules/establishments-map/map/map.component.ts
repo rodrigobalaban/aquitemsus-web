@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CustomMapOptions } from 'src/app/shared/interfaces/custom-map-options.interface';
+import { CustomMapOptions } from 'src/app/shared';
 import { environment } from 'src/environments/environment';
 
 @Component({
