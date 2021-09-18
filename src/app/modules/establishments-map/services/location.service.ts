@@ -4,7 +4,7 @@ import { Location } from 'src/app/shared';
 @Injectable({
   providedIn: 'root',
 })
-export class LocationServiceService {
+export class LocationService {
   constructor() {}
 
   getUserLocation(): Promise<Location> {
