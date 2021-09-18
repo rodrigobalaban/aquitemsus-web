@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #5e94ff;
+      }
+
+      .cls-1 {
+        opacity: 0.2;
+      }
+    </style>
+  </defs>
+  <circle id="Elipse_1_copiar" data-name="Elipse 1 copiar" class="cls-1" cx="13" cy="13" r="12.75"/>
+  <circle id="Elipse_1" data-name="Elipse 1" class="cls-2" cx="13" cy="13" r="7"/>
+</svg>
