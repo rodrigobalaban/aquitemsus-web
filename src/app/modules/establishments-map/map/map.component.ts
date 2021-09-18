@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CustomMapOptions } from 'src/app/shared';
+import { CustomMapOptions, Location } from 'src/app/shared';
 import { environment } from 'src/environments/environment';
+import { LocationService } from '../services';
 
 @Component({
   selector: 'app-map',
@@ -11,15 +12,33 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent {
-  apiLoaded: Observable<boolean>;
-  mapOptions: CustomMapOptions;
+  apiLoaded!: Observable<boolean>;
+  mapOptions!: CustomMapOptions;
+  markerUserLocation!: google.maps.LatLngLiteral;
+  userLocation!: Location;
 
-  constructor(httpClient: HttpClient) {
-    this.mapOptions = {
-      mapId: environment.googleMapId,
+  constructor(
+    private locationService: LocationService,
+    private httpClient: HttpClient
+  ) {
+    this.buildMap();
+  }
+
+  async buildMap(): Promise<void> {
+    await this.captureUserLocation();
+
+    this.markerUserLocation = {
+      lng: this.userLocation.longitude,
+      lat: this.userLocation.latitude,
     };
 
-    this.apiLoaded = httpClient
+    this.mapOptions = {
+      mapId: environment.googleMapId,
+      center: this.markerUserLocation,
+      zoom: 15,
+    };
+
+    this.apiLoaded = this.httpClient
       .jsonp(
         'https://maps.googleapis.com/maps/api/js?key=' +
           environment.googleMapsApiKey,
@@ -29,5 +48,9 @@ export class MapComponent {
         map(() => true),
         catchError(() => of(false))
       );
+  }
+
+  async captureUserLocation(): Promise<void> {
+    this.userLocation = await this.locationService.getUserLocation();
   }
 }
