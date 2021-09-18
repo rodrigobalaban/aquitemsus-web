@@ -33,6 +33,7 @@ export class MapComponent {
     };
 
     this.mapOptions = {
+      disableDefaultUI: true, 
       mapId: environment.googleMapId,
       center: this.markerUserLocation,
       zoom: 15,
