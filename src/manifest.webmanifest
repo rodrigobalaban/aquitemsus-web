@@ -1,8 +1,8 @@
 {
-  "name": "aquitemsus-web",
-  "short_name": "aquitemsus-web",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Aqui tem SUS",
+  "short_name": "Aqui tem SUS",
+  "theme_color": "#0c59ca",
+  "background_color": "#0c59ca",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
