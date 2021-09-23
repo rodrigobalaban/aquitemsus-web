@@ -1,5 +1,7 @@
 <div id="map" *ngIf="apiLoaded | async">
   <google-map width="100%" height="100%" [options]="mapOptions">
     <map-marker [position]="markerUserLocation" icon="assets/icons/map/user-location.svg"></map-marker>
+    <map-marker *ngFor="let establishment of establishments" [position]="getMarkerPosition(establishment.location)">
+    </map-marker>
   </google-map>
 </div>

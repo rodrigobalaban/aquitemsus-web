@@ -1,0 +1,67 @@
+[
+    {
+        "id": 2567083,
+        "name": "UNIDADE DE SAUDE PADRE SANTO MARIO GRANZOTTO I",
+        "category": {
+            "id": 1,
+            "name": "CENTRO DE SAUDE/UNIDADE BASICA"
+        },
+        "officeHours": [],
+        "location": {
+            "latitude": -26.226583568552600,
+            "longitude": -51.059303283691400
+        }
+    },
+    {
+        "id": 2567083,
+        "name": "UNIDADE DE SAUDE PADRE SANTO MARIO GRANZOTTO II",
+        "category": {
+            "id": 1,
+            "name": "CENTRO DE SAUDE/UNIDADE BASICA"
+        },
+        "officeHours": [],
+        "location": {
+            "latitude": -26.22667981190430,
+            "longitude": -51.05724334716790
+        }
+    },
+    {
+        "id": 9303944,
+        "name": "FARMACIA MUNICIPAL",
+        "category": {
+            "id": 2,
+            "name": "FARMACIA"
+        },
+        "officeHours": [],
+        "location": {
+            "latitude": -26.227622992536800,
+            "longitude": -51.083528995513900
+        }
+    },
+    {
+        "id": 2567288,
+        "name": "UNIDADE DE SAUDE SAO BRAZ",
+        "category": {
+            "id": 1,
+            "name": "CENTRO DE SAUDE/UNIDADE BASICA"
+        },
+        "officeHours": [],
+        "location": {
+            "latitude": -26.233416648602700,
+            "longitude": -51.04778051376340
+        }
+    },
+    {
+        "id": 2567083,
+        "name": "UNIDADE DE SAUDE SAO SEBASTIAO",
+        "category": {
+            "id": 1,
+            "name": "CENTRO DE SAUDE/UNIDADE BASICA"
+        },
+        "officeHours": [],
+        "location": {
+            "latitude": -26.22352298843240,
+            "longitude": -51.03179454803460
+        }
+    }
+]

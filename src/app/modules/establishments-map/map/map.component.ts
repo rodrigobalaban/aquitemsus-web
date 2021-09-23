@@ -2,26 +2,35 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CustomMapOptions, UserSUS } from 'src/app/shared';
+import {
+  CustomMapOptions,
+  Establishment,
+  Location,
+  UserSUS,
+} from 'src/app/shared';
 import { environment } from 'src/environments/environment';
-import { LocationService } from '../services';
+import { EstablishmentService, LocationService } from '../services';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
+  providers: [EstablishmentService],
 })
 export class MapComponent {
   apiLoaded!: Observable<boolean>;
+  establishments: Establishment[] = [];
   mapOptions!: CustomMapOptions;
   markerUserLocation!: google.maps.LatLngLiteral;
   user = new UserSUS();
 
   constructor(
+    private establishmentService: EstablishmentService,
     private locationService: LocationService,
     private httpClient: HttpClient
   ) {
     this.buildMap();
+    this.searchEstablishmentsNearby();
   }
 
   async buildMap(): Promise<void> {
@@ -33,7 +42,7 @@ export class MapComponent {
     };
 
     this.mapOptions = {
-      disableDefaultUI: true, 
+      disableDefaultUI: true,
       mapId: environment.googleMapId,
       center: this.markerUserLocation,
       zoom: 15,
@@ -53,5 +62,14 @@ export class MapComponent {
 
   async captureUserLocation(): Promise<void> {
     this.user.location = await this.locationService.getUserLocation();
+  }
+
+  async searchEstablishmentsNearby(): Promise<void> {
+    this.establishments =
+      await this.establishmentService.getNearbyEstablishments();
+  }
+
+  getMarkerPosition(location: Location) {
+    return new google.maps.LatLng(location.latitude, location.longitude);
   }
 }
