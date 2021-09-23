@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CustomMapOptions, Location } from 'src/app/shared';
+import { CustomMapOptions, UserSUS } from 'src/app/shared';
 import { environment } from 'src/environments/environment';
 import { LocationService } from '../services';
 
@@ -15,7 +15,7 @@ export class MapComponent {
   apiLoaded!: Observable<boolean>;
   mapOptions!: CustomMapOptions;
   markerUserLocation!: google.maps.LatLngLiteral;
-  userLocation!: Location;
+  user = new UserSUS();
 
   constructor(
     private locationService: LocationService,
@@ -28,8 +28,8 @@ export class MapComponent {
     await this.captureUserLocation();
 
     this.markerUserLocation = {
-      lng: this.userLocation.longitude,
-      lat: this.userLocation.latitude,
+      lng: this.user.location.longitude,
+      lat: this.user.location.latitude,
     };
 
     this.mapOptions = {
@@ -52,6 +52,6 @@ export class MapComponent {
   }
 
   async captureUserLocation(): Promise<void> {
-    this.userLocation = await this.locationService.getUserLocation();
+    this.user.location = await this.locationService.getUserLocation();
   }
 }
