@@ -5,6 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 import {
   CustomMapOptions,
   Establishment,
+  EstablishmentCategory,
   Location,
   UserSUS,
 } from 'src/app/shared';
@@ -71,5 +72,20 @@ export class MapComponent {
 
   getMarkerPosition(location: Location) {
     return new google.maps.LatLng(location.latitude, location.longitude);
+  }
+
+  getPathIconByCategory(category: EstablishmentCategory) {
+    let path = 'assets/icons/map/';
+
+    switch (category.id) {
+      case 2:
+        path += 'farmacia.svg';
+        break;
+      default:
+        path += 'unidade-basica-saude.svg';
+        break;
+    }
+
+    return path;
   }
 }
