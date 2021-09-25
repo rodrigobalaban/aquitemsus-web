@@ -1,8 +1,17 @@
 <div id="map" *ngIf="apiLoaded | async">
   <google-map width="100%" height="100%" [options]="mapOptions">
     <map-marker [position]="markerUserLocation" icon="assets/icons/map/user-location.svg"></map-marker>
-    <map-marker *ngFor="let establishment of establishments" [position]="getMarkerPosition(establishment.location)"
-      [icon]="getPathIconByCategory(establishment.category)">
+
+    <map-marker #marker="mapMarker" *ngFor="let establishment of establishments"
+      [position]="getMarkerPosition(establishment.location)" [icon]="getPathIconByCategory(establishment.category)"
+      (mapClick)="openEstablishmentDetails(marker, establishment)">
     </map-marker>
+
+    <map-info-window class="establishment-details">
+      <h5 class="category" [ngClass]="'category-id-' + establishmentSelected?.category?.id">{{
+        establishmentSelected?.category?.name }}</h5>
+      <h3 class="name">{{ establishmentSelected?.name }}</h3>
+      <p class="office-hours">Atendimento de Seg. a Sex.</p>
+    </map-info-window>
   </google-map>
 </div>

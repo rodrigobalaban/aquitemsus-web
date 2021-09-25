@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
@@ -19,8 +20,11 @@ import { EstablishmentService, LocationService } from '../services';
   providers: [EstablishmentService],
 })
 export class MapComponent {
+  @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+  
   apiLoaded!: Observable<boolean>;
   establishments: Establishment[] = [];
+  establishmentSelected!: Establishment;
   mapOptions!: CustomMapOptions;
   markerUserLocation!: google.maps.LatLngLiteral;
   user = new UserSUS();
@@ -87,5 +91,10 @@ export class MapComponent {
     }
 
     return path;
+  }
+
+  openEstablishmentDetails(marker: MapMarker, establishment: Establishment) {
+    this.establishmentSelected = establishment;
+    this.infoWindow.open(marker)
   }
 }
