@@ -32,7 +32,7 @@
               "src/manifest.webmanifest"
             ],
             "styles": [
-              "src/assets/fonts/gilroy.css",
+              "src/assets/fonts/Gilroy.css",
               "src/styles.scss"
             ],
             "scripts": [],
