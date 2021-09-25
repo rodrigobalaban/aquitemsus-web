@@ -1,0 +1,14 @@
+<form id="search-box">
+    <mat-form-field class="search-field" appearance="outline">
+        <mat-label>Buscar...</mat-label>
+        <input matInput aria-label="Estabelecimento" [matAutocomplete]="auto" [formControl]="searchControl" />
+        
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let establishment of filteredEstablishments" [value]="establishment.name">
+                <img class="establishment-icon" aria-hidden height="25" src="assets/icons/map/unidade-basica-saude.svg" />
+                <span>{{ establishment.name }}</span> -
+                <small>{{ establishment.category.name }}</small>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
