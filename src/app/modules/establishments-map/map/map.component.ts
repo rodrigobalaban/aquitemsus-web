@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import {
   CustomMapOptions,
   Establishment,
@@ -10,98 +8,99 @@ import {
   Location,
   UserSUS,
 } from 'src/app/shared';
-import { environment } from 'src/environments/environment';
-import { EstablishmentService, LocationService } from '../services';
+import {
+  EstablishmentService,
+  GoogleMapsService,
+  LocationService,
+} from '../services';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
-  providers: [EstablishmentService],
+  providers: [EstablishmentService, GoogleMapsService],
 })
-export class MapComponent {
+export class MapComponent implements OnInit {
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
   @ViewChild('googleMap') googleMap!: GoogleMap;
-  
-  apiLoaded!: Observable<boolean>;
-  establishments: Establishment[] = [];
-  establishmentSelected!: Establishment;
+
+  establishmentsList: Establishment[] | undefined;
+  establishmentSelected: Establishment | undefined;
+
+  googleApiLoaded = false;
   mapOptions!: CustomMapOptions;
-  markerUserLocation!: google.maps.LatLngLiteral;
+
   user = new UserSUS();
+  userLocationMarker!: google.maps.LatLng;
 
   constructor(
     private establishmentService: EstablishmentService,
-    private locationService: LocationService,
-    private httpClient: HttpClient
-  ) {
-    this.buildMap();
+    private googleMapsService: GoogleMapsService,
+    private locationService: LocationService
+  ) {}
+
+  async ngOnInit(): Promise<void> {
+    await this.loadGoogleMapApi();
+
+    this.setMapOptions();
+    this.setUserLocationMarker();
     this.searchEstablishmentsNearby();
   }
 
-  async buildMap(): Promise<void> {
-    await this.captureUserLocation();
+  async loadGoogleMapApi(): Promise<void> {
+    this.googleApiLoaded = await this.googleMapsService.loadGoogleMapApi();
+  }
 
-    this.markerUserLocation = {
-      lng: this.user.location.longitude,
-      lat: this.user.location.latitude,
-    };
-
+  setMapOptions(): void {
     this.mapOptions = {
-      center: this.markerUserLocation,
       disableDefaultUI: true,
       keyboardShortcuts: false,
-      mapId: environment.googleMapId,      
+      mapId: environment.googleMapId,
       zoom: 15,
     };
-
-    this.apiLoaded = this.httpClient
-      .jsonp(
-        'https://maps.googleapis.com/maps/api/js?key=' +
-          environment.googleMapsApiKey,
-        'callback'
-      )
-      .pipe(
-        map(() => true),
-        catchError(() => of(false))
-      );
   }
 
-  async captureUserLocation(): Promise<void> {
-    this.user.location = await this.locationService.getUserLocation();
+  async setUserLocationMarker(): Promise<void> {
+    this.user.location = await this.captureUserLocation();
+
+    this.userLocationMarker = this.convertLocationToGoogleFormat(
+      this.user.location
+    );
+
+    this.centralizeMapOn(this.user.location);
   }
 
-  async searchEstablishmentsNearby(): Promise<void> {
-    this.establishments =
-      await this.establishmentService.getNearbyEstablishments();
+  async captureUserLocation(): Promise<Location> {
+    return await this.locationService.getUserLocation();
   }
 
-  getLocationInGoogleFormat(location: Location) {
+  convertLocationToGoogleFormat(location: Location): google.maps.LatLng {
     return new google.maps.LatLng(location.latitude, location.longitude);
   }
 
-  getPathIconByCategory(category: EstablishmentCategory) {
-    let path = 'assets/icons/map/';
-
-    switch (category.id) {
-      case 2:
-        path += 'farmacia.svg';
-        break;
-      default:
-        path += 'unidade-basica-saude.svg';
-        break;
-    }
-
-    return path;
+  centralizeMapOn(location: Location) {
+    var googleLocation = this.convertLocationToGoogleFormat(location);
+    this.googleMap.panTo(googleLocation);
   }
 
-  openEstablishmentDetails(marker: MapMarker, establishment: Establishment) {
+  async searchEstablishmentsNearby(): Promise<void> {
+    this.establishmentsList =
+      await this.establishmentService.getNearbyEstablishments();
+  }
+
+  centralizeMapOnEstablishmentLocation(establishment: Establishment) {
+    this.centralizeMapOn(establishment.location);
+  }
+
+  getIconPathByCategory(category: EstablishmentCategory): string {
+    return this.establishmentService.getIconPathByCategory(category);
+  }
+
+  openEstablishmentInfoWindow(
+    marker: MapMarker,
+    establishment: Establishment
+  ): void {
     this.establishmentSelected = establishment;
-    this.infoWindow.open(marker)
-  }
-
-  centralizeMapAtEstablishmentLocation(establishment: Establishment) {
-    var location = this.getLocationInGoogleFormat(establishment.location);
-    this.googleMap.panTo(location);
+    this.infoWindow.open(marker);
   }
 }

@@ -1,13 +1,13 @@
-<div id="map" *ngIf="apiLoaded | async">
-  <search-box (onSelectEstablishment)="centralizeMapAtEstablishmentLocation($event)"></search-box>
+<div id="map" *ngIf="googleApiLoaded">
+  <search-box (onSelectEstablishment)="centralizeMapOnEstablishmentLocation($event)"></search-box>
 
   <google-map #googleMap="googleMap" width="100%" height="100%" [options]="mapOptions">
-    <map-marker [position]="markerUserLocation" icon="assets/icons/map/user-location.svg"></map-marker>
+    <map-marker [position]="userLocationMarker" icon="assets/icons/map/user-location.svg"></map-marker>
 
-    <map-marker #marker="mapMarker" *ngFor="let establishment of establishments"
-      [position]="getLocationInGoogleFormat(establishment.location)"
-      [icon]="getPathIconByCategory(establishment.category)"
-      (mapClick)="openEstablishmentDetails(marker, establishment)">
+    <map-marker #marker="mapMarker" *ngFor="let establishment of establishmentsList"
+      [position]="convertLocationToGoogleFormat(establishment.location)"
+      [icon]="getIconPathByCategory(establishment.category)"
+      (mapClick)="openEstablishmentInfoWindow(marker, establishment)">
     </map-marker>
 
     <map-info-window class="establishment-details">
