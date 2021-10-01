@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
-import { MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {
@@ -21,6 +21,7 @@ import { EstablishmentService, LocationService } from '../services';
 })
 export class MapComponent {
   @ViewChild(MapInfoWindow) infoWindow!: MapInfoWindow;
+  @ViewChild('googleMap') googleMap!: GoogleMap;
   
   apiLoaded!: Observable<boolean>;
   establishments: Establishment[] = [];
@@ -75,7 +76,7 @@ export class MapComponent {
       await this.establishmentService.getNearbyEstablishments();
   }
 
-  getMarkerPosition(location: Location) {
+  getLocationInGoogleFormat(location: Location) {
     return new google.maps.LatLng(location.latitude, location.longitude);
   }
 
@@ -97,5 +98,10 @@ export class MapComponent {
   openEstablishmentDetails(marker: MapMarker, establishment: Establishment) {
     this.establishmentSelected = establishment;
     this.infoWindow.open(marker)
+  }
+
+  centralizeMapAtEstablishmentLocation(establishment: Establishment) {
+    var location = this.getLocationInGoogleFormat(establishment.location);
+    this.googleMap.panTo(location);
   }
 }

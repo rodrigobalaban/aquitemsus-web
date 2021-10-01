@@ -1,10 +1,12 @@
 <div id="map" *ngIf="apiLoaded | async">
-  <search-box></search-box>
-  <google-map width="100%" height="100%" [options]="mapOptions">
+  <search-box (onSelectEstablishment)="centralizeMapAtEstablishmentLocation($event)"></search-box>
+
+  <google-map #googleMap="googleMap" width="100%" height="100%" [options]="mapOptions">
     <map-marker [position]="markerUserLocation" icon="assets/icons/map/user-location.svg"></map-marker>
 
     <map-marker #marker="mapMarker" *ngFor="let establishment of establishments"
-      [position]="getMarkerPosition(establishment.location)" [icon]="getPathIconByCategory(establishment.category)"
+      [position]="getLocationInGoogleFormat(establishment.location)"
+      [icon]="getPathIconByCategory(establishment.category)"
       (mapClick)="openEstablishmentDetails(marker, establishment)">
     </map-marker>
 
