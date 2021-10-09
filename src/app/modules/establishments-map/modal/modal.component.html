@@ -1,0 +1,43 @@
+<button mat-mini-fab id="close-button" color="primary" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+</button>
+<div class="establishment">
+    <h5 class="category" [ngClass]="'category-id-' + establishment.category?.id">{{
+        establishment.category.name }}</h5>
+    <h3 class="name">{{ establishment.name }}</h3>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <div class="establishment-details">
+        <div class="details-item">
+            <mat-icon fontSet="material-icons-outlined">place</mat-icon>
+            <div>
+                <h5 class="title">Endereço</h5>
+                <p>Rua Frei Rogério, 579</p>
+                <p>Centro</p>
+                <p>Porto União - SC</p>
+            </div>
+        </div>
+        <div class="details-item">
+            <mat-icon fontSet="material-icons-outlined">phone</mat-icon>
+            <div>
+                <h5 class="title">Telefone</h5>
+                <p>(42) 3521-2233</p>
+            </div>
+        </div>
+        <div class="details-item">
+            <mat-icon fontSet="material-icons-outlined">email</mat-icon>
+            <div>
+                <h5 class="title">E-mail</h5>
+                <p>controller@saocamilosaude.org.br</p>
+            </div>
+        </div>
+        <div class="details-item">
+            <mat-icon fontSet="material-icons-outlined">schedule</mat-icon>
+            <div>
+                <h5 class="title">Horário de Atendimento</h5>
+                <p>Sempre Aberto</p>
+            </div>
+        </div>
+    </div>
+</div>

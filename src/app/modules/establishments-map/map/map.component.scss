@@ -5,28 +5,21 @@
     display: flex;
     flex-direction: column;
     padding: 0.5em;
+  }
+}
 
-    .category,
-    .name,
-    .office-hours {
-      margin: 0;
-    }
+::ng-deep {
+  .cdk-overlay-dark-backdrop {
+    background: none;
+  }
 
-    .category,
-    .name {
-      font-weight: bold;
-    }
-
-    .office-hours {
-      color: #9A9A9A;
-    }
-
-    .category-id-1 {
-      color: #5485e5;
-    }
-
-    .category-id-2 {
-      color: #8bc94d;
+  .establishment-modal {
+    .mat-dialog-container {
+      background: rgba($color: #fff, $alpha: 0.7);
+      backdrop-filter: blur(6px) brightness(115%);
+      border-radius: 10px;
+      overflow: visible;
+      position: relative;
     }
   }
 }
