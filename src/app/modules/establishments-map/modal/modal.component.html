@@ -1,0 +1,56 @@
+<button mat-mini-fab id="close-button" color="primary" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+</button>
+<div class="establishment">
+    <h5 class="category" [ngClass]="'category-id-' + establishment.category?.id">{{
+        establishment.category.name }}</h5>
+    <h3 class="name">{{ establishment.name }}</h3>
+
+    <mat-divider class="divider"></mat-divider>
+
+    <div class="establishment-details">
+        <div *ngIf="establishment.address as address" class="details-item">
+            <mat-icon fontSet="material-icons-outlined">place</mat-icon>
+            <div>
+                <h5 class="title">Endereço</h5>
+                <p>{{ address.street }}, {{ address.number }}</p>
+                <p>{{ address.district }}</p>
+                <p>{{ address.city.name }} - {{ address.city.state }}</p>
+            </div>
+        </div>
+        <div *ngIf="establishment.phones.length > 0" class="details-item">
+            <mat-icon fontSet="material-icons-outlined">phone</mat-icon>
+            <div>
+                <h5 class="title">Telefone</h5>
+                <p *ngFor="let phone of establishment.phones">{{ phone }}</p>
+            </div>
+        </div>
+        <div *ngIf="establishment.email" class="details-item">
+            <mat-icon fontSet="material-icons-outlined">email</mat-icon>
+            <div>
+                <h5 class="title">E-mail</h5>
+                <p>{{ establishment.email }}</p>
+            </div>
+        </div>
+        <div *ngIf="establishment.officeHours.length > 0" class="details-item">
+            <mat-icon fontSet="material-icons-outlined">schedule</mat-icon>
+            <div>
+                <h5 class="title">Horário de Atendimento</h5>
+                <p *ngFor="let officeHour of establishment.officeHours">
+                    {{ getWeekdayDescription(officeHour.dayOfWeek) }}: {{ officeHour.start }}h - {{ officeHour.end }}h
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="establishment.specialties.length > 0">
+        <mat-divider class="divider"></mat-divider>
+
+        <div class="establishment-specialties">
+            <div *ngFor="let specialty of establishment.specialties" class="specialty">
+                <img class="icon" [src]="getSpecialtyIcon(specialty)">
+                <h4 class="title">{{ specialty.name }}</h4>
+            </div>
+        </div>
+    </div>
+</div>

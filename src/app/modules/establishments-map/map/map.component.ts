@@ -13,6 +13,8 @@ import {
   GoogleMapsService,
   LocationService,
 } from '../services';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from '../modal';
 
 @Component({
   selector: 'app-map',
@@ -36,7 +38,8 @@ export class MapComponent implements OnInit {
   constructor(
     private establishmentService: EstablishmentService,
     private googleMapsService: GoogleMapsService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private modalService: MatDialog
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -102,5 +105,14 @@ export class MapComponent implements OnInit {
   ): void {
     this.establishmentSelected = establishment;
     this.infoWindow.open(marker);
+  }
+
+  openModalEstablishment(): void {
+    this.modalService.open(ModalComponent, {
+      data: {
+        establishment: this.establishmentSelected,
+      },
+      panelClass: 'establishment-modal'
+    });
   }
 }
