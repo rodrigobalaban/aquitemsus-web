@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Establishment } from 'src/app/shared';
+import { Establishment, Specialty } from 'src/app/shared';
 
 export interface DialogData {
   establishment: Establishment;
@@ -19,30 +19,60 @@ export class ModalComponent {
   }
 
   getWeekdayDescription(dayOfWeek: number): string {
+    let dayDescription = '';
+
     switch (dayOfWeek) {
       case 0: {
-        return 'Domingo';
+        dayDescription = 'Domingo';
+        break;
       }
       case 1: {
-        return 'Segunda';
+        dayDescription = 'Segunda';
+        break;
       }
       case 2: {
-        return 'Terça';
+        dayDescription = 'Terça';
+        break;
       }
       case 3: {
-        return 'Quarta';
+        dayDescription = 'Quarta';
+        break;
       }
       case 4: {
-        return 'Quinta';
+        dayDescription = 'Quinta';
+        break;
       }
       case 5: {
-        return 'Sexta';
+        dayDescription = 'Sexta';
+        break;
       }
       case 6: {
-        return 'Sábado';
+        dayDescription = 'Sábado';
+        break;
       }
     }
 
-    return '';
+    return dayDescription;
+  }
+
+  getSpecialtyIcon(specialty: Specialty): string {
+    let path = 'assets/icons/specialties/';
+
+    switch (specialty.id) {
+      case 2:
+        path += 'pediatria.png';
+        break;
+      case 3:
+        path += 'ginecologia.png';
+        break;
+      case 4:
+        path += 'odontologia.png';
+        break;
+      default:
+        path += 'clinica-geral.png';
+        break;
+    }
+
+    return path;
   }
 }

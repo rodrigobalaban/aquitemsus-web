@@ -42,4 +42,15 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="establishment.specialties.length > 0">
+        <mat-divider class="divider"></mat-divider>
+
+        <div class="establishment-specialties">
+            <div *ngFor="let specialty of establishment.specialties" class="specialty">
+                <img class="icon" [src]="getSpecialtyIcon(specialty)">
+                <h4 class="title">{{ specialty.name }}</h4>
+            </div>
+        </div>
+    </div>
 </div>

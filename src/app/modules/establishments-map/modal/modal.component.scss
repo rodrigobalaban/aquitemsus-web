@@ -22,7 +22,29 @@
             margin-bottom: 0;
         }
 
-        &:last-child, p {
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.establishment-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+
+    .specialty {
+        max-width: 33.33%;
+        text-align: center;
+        margin-bottom: 0.5em;
+
+        .icon {
+            width: 50px;
+        }
+
+        .title {
+            line-height: 1.1em;
             margin-bottom: 0;
         }
     }
