@@ -9,34 +9,36 @@
     <mat-divider class="divider"></mat-divider>
 
     <div class="establishment-details">
-        <div class="details-item">
+        <div *ngIf="establishment.address as address" class="details-item">
             <mat-icon fontSet="material-icons-outlined">place</mat-icon>
             <div>
                 <h5 class="title">Endereço</h5>
-                <p>Rua Frei Rogério, 579</p>
-                <p>Centro</p>
-                <p>Porto União - SC</p>
+                <p>{{ address.street }}, {{ address.number }}</p>
+                <p>{{ address.district }}</p>
+                <p>{{ address.city.name }} - {{ address.city.state }}</p>
             </div>
         </div>
-        <div class="details-item">
+        <div *ngIf="establishment.phones.length > 0" class="details-item">
             <mat-icon fontSet="material-icons-outlined">phone</mat-icon>
             <div>
                 <h5 class="title">Telefone</h5>
-                <p>(42) 3521-2233</p>
+                <p *ngFor="let phone of establishment.phones">{{ phone }}</p>
             </div>
         </div>
-        <div class="details-item">
+        <div *ngIf="establishment.email" class="details-item">
             <mat-icon fontSet="material-icons-outlined">email</mat-icon>
             <div>
                 <h5 class="title">E-mail</h5>
-                <p>controller@saocamilosaude.org.br</p>
+                <p>{{ establishment.email }}</p>
             </div>
         </div>
-        <div class="details-item">
+        <div *ngIf="establishment.officeHours.length > 0" class="details-item">
             <mat-icon fontSet="material-icons-outlined">schedule</mat-icon>
             <div>
                 <h5 class="title">Horário de Atendimento</h5>
-                <p>Sempre Aberto</p>
+                <p *ngFor="let officeHour of establishment.officeHours">
+                    {{ getWeekdayDescription(officeHour.dayOfWeek) }}: {{ officeHour.start }}h - {{ officeHour.end }}h
+                </p>
             </div>
         </div>
     </div>
