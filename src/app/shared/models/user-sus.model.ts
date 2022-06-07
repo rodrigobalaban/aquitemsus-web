@@ -1,6 +1,6 @@
-import { Location } from ".";
+import { Localization } from ".";
 import { User } from "./user.model";
 
 export class UserSUS extends User {
-    public location!: Location;
+    public localization!: Localization;
 }

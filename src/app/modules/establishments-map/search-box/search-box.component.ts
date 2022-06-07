@@ -22,10 +22,7 @@ export class SearchBoxComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  private async filterEstablishments(value: string): Promise<void> {
-    this.filteredEstablishments =
-      await this.establishmentService.getNearbyEstablishments();
-  }
+  private async filterEstablishments(value: string): Promise<void> {}
 
   emitEventEstablishmentSelected(establishment: Establishment): void {
     this.onSelectEstablishment.emit(establishment);

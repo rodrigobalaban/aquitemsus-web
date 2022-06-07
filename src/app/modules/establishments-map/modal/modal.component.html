@@ -1,8 +1,8 @@
 <button mat-mini-fab id="close-button" color="primary" mat-dialog-close>
     <mat-icon>close</mat-icon>
 </button>
-<div class="establishment">
-    <h5 class="category" [ngClass]="'category-id-' + establishment.category?.id">{{
+<div *ngIf="establishment | async as establishment" class="establishment">
+    <h5 class="category" [ngClass]="'category-id-' + establishment.category.id">{{
         establishment.category.name }}</h5>
     <h3 class="name">{{ establishment.name }}</h3>
 
@@ -18,21 +18,21 @@
                 <p>{{ address.city.name }} - {{ address.city.state }}</p>
             </div>
         </div>
-        <div *ngIf="establishment.phones.length > 0" class="details-item">
-            <mat-icon fontSet="material-icons-outlined">phone</mat-icon>
-            <div>
-                <h5 class="title">Telefone</h5>
-                <p *ngFor="let phone of establishment.phones">{{ phone }}</p>
-            </div>
-        </div>
         <div *ngIf="establishment.email" class="details-item">
             <mat-icon fontSet="material-icons-outlined">email</mat-icon>
             <div>
                 <h5 class="title">E-mail</h5>
-                <p>{{ establishment.email }}</p>
+                <a href="mailto:{{ establishment.email }}">{{ establishment.email }}</a>
             </div>
         </div>
-        <div *ngIf="establishment.officeHours.length > 0" class="details-item">
+        <div *ngIf="establishment.phone" class="details-item">
+            <mat-icon fontSet="material-icons-outlined">phone</mat-icon>
+            <div>
+                <h5 class="title">Telefone</h5>
+                <a href="tel:{{ establishment.phone }}">{{ establishment.phone }}</a>
+            </div>
+        </div>
+        <div *ngIf="establishment.officeHours" class="details-item">
             <mat-icon fontSet="material-icons-outlined">schedule</mat-icon>
             <div>
                 <h5 class="title">Horário de Atendimento</h5>

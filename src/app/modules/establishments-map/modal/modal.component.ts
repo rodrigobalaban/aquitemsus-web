@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Establishment, Specialty } from 'src/app/shared';
+import { EstablishmentService } from '../services';
 
 export interface DialogData {
   establishment: Establishment;
@@ -12,10 +13,19 @@ export interface DialogData {
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
-  establishment: Establishment;
+  establishment!: Promise<Establishment>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: DialogData) {
-    this.establishment = data.establishment;
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private establishmentService: EstablishmentService
+  ) {
+    this.getEstablishmentDetails(data.establishment);
+  }
+
+  async getEstablishmentDetails(establishment: Establishment): Promise<void> {
+    this.establishment = this.establishmentService.getEstablishmentbyId(
+      establishment.id
+    );
   }
 
   getWeekdayDescription(dayOfWeek: number): string {
