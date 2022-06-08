@@ -16,6 +16,7 @@ export class Establishment {
     public email: string,
     public phone: string,
     public specialties: Specialty[],
-    public professionals: Professional[]
+    public professionals: Professional[],
+    public alwaysOpen: boolean
   ) {}
 }

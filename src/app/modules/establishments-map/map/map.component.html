@@ -16,7 +16,7 @@
       <h5 class="category" [ngClass]="'category-id-' + establishmentSelected?.category?.id">{{
         establishmentSelected?.category?.name }}</h5>
       <h3 class="name">{{ establishmentSelected?.name }}</h3>
-      <p class="office-hours">Atendimento de Seg. a Sex.</p>
+      <p *ngIf="establishmentSelected?.alwaysOpen" class="office-hours">Atendimento 24h.</p>
       <a (click)="openModalEstablishment()">Ver mais informações</a>
     </map-info-window>
   </google-map>
