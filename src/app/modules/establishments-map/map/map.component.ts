@@ -105,8 +105,11 @@ export class MapComponent implements OnInit {
     this.centralizeMapOn(establishment.localization);
   }
 
-  getIconPathByCategory(category: EstablishmentCategory): string {
-    return this.establishmentService.getIconPathByCategory(category);
+  getIconPathByCategory(category: EstablishmentCategory): google.maps.Icon {
+    return {      
+      url: this.establishmentService.getIconPathByCategory(category),
+      scaledSize: new google.maps.Size(60, 60),
+    };
   }
 
   openEstablishmentInfoWindow(
@@ -162,7 +165,7 @@ export class MapComponent implements OnInit {
     if (this.googleMap.getZoom() < this.MINIMUM_ZOOM) {
       this.clearSearchedEstablishments();
       this.isAllowedZoomRange = false;
-      
+
       return;
     }
 
