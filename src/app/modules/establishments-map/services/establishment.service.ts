@@ -31,11 +31,50 @@ export class EstablishmentService {
     let path = 'assets/icons/map/';
 
     switch (category?.id) {
+      case 1:
+        path += 'unidade-basica-saude.svg';
+        break;
       case 2:
-        path += 'farmacia.svg';
+        path += 'central-gestao.png';
+        break;
+      case 4:
+        path += 'central-abastecimento.png';
+        break;
+      case 6:
+        path += 'hospital.png';
+        break;
+      case 8:
+        path += 'pronto-atendimento.png';
+        break;
+      case 9:
+        path += 'farmacia.png';
+        break;
+      case 10:
+        path += 'hematologia.png';
+        break;
+      case 15:
+        path += 'reabilitacao.png';
+        break;
+      case 16:
+        path += 'ambulatorio.png';
+        break;
+      case 17:
+        path += 'atencao-psicosocial.png';
+        break;
+      case 18:
+        path += 'apoio-diagnostico.png';
+        break;
+      case 19:
+        path += 'terapias-especiais.png';
+        break;
+      case 20:
+        path += 'protese-dentaria.png';
+        break;
+      case 25:
+        path += 'imunizacao.png';
         break;
       default:
-        path += 'unidade-basica-saude.svg';
+        path += 'user-location.svg';
         break;
     }
 
