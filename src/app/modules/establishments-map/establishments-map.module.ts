@@ -15,6 +15,7 @@ import { MapComponent } from './map/map.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { ModalComponent } from './modal';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [MapComponent, SearchBoxComponent, ModalComponent],
@@ -32,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     EstablishmentsMapRoutingModule,
   ],
 })

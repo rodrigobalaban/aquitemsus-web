@@ -2,14 +2,13 @@
   <search-box (onSelectEstablishment)="centralizeMapOnEstablishmentLocalization($event)"></search-box>
 
   <google-map #googleMap="googleMap" width="100%" height="100%" [options]="mapOptions"
-    (centerChanged)="onCenterMapChanged()"
-    (zoomChanged)="onZoomChanged()">
+    (mapDragend)="onCenterMapChanged()" (zoomChanged)="onZoomChanged()">
     <map-marker [position]="userLocalizationMarker" icon="assets/icons/map/user-location.svg"></map-marker>
 
-    <map-marker #marker="mapMarker" *ngFor="let establishment of establishmentsList"
+    <map-marker #marker="mapMarker" ngClass="marker" *ngFor="let establishment of establishmentsList"
       [position]="convertLocalizationToGoogleFormat(establishment.localization)"
       [icon]="getIconPathByCategory(establishment.category)"
-      (mapClick)="openEstablishmentInfoWindow(marker, establishment)">
+      (mapClick)="openEstablishmentInfoWindow(marker, establishment)" [options]="{optimized: true}">
     </map-marker>
 
     <map-info-window class="establishment-details establishment">
