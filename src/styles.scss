@@ -98,6 +98,10 @@ body {
   font-family: "Gilroy", sans-serif;
 }
 
+a {
+  cursor: pointer;
+}
+
 .establishment {
   .category,
   .name {
@@ -114,8 +118,28 @@ body {
     color: #5485e5;
   } 
 
+  .category-id-2 {
+    color: #e57a45;
+  }
+
+  .category-id-3 {
+    color: #ffa071;
+  }
+
+  .category-id-4 {
+    color: #e5b045;
+  }
+
+  .category-id-5 {
+    color: #4dc4ff;
+  }
+
   .category-id-6 {
     color: #EA4E4E;
+  }
+
+  .category-id-7 {
+    color: #71d0ff;
   }
 
   .category-id-8 {
@@ -124,5 +148,73 @@ body {
 
   .category-id-9 {
     color: #8bc94d;
+  }
+
+  .category-id-10 {
+    color: #f17171;
+  }
+
+  .category-id-11 {
+    color: #8b98a6;
+  }
+
+  .category-id-12 {
+    color: #ff4da5;
+  }
+
+  .category-id-13 {
+    color: #ff71b7;
+  }
+
+  .category-id-14 {
+    color: #e54594;
+  }
+
+  .category-id-15 {
+    color: #b38dff;
+  }
+
+  .category-id-16 {
+    color: #45c5b0;
+  }
+
+  .category-id-17 {
+    color: #ffc44d;
+  }
+
+  .category-id-18 {
+    color: #7d8995;
+  }
+
+  .category-id-19 {
+    color: #4ddbc4;
+  }
+
+  .category-id-20 {
+    color: #ffa071;
+  }
+
+  .category-id-21 {
+    color: #a071ff;
+  }
+
+  .category-id-22 {
+    color: #7d8995;
+  }
+
+  .category-id-23 {
+    color: #ffd071;
+  }
+
+  .category-id-24 {
+    color: #8b98a6;
+  }
+
+  .category-id-25 {
+    color: #7db545;
+  }
+
+  .category-id-0 {
+    color: #45c5b0;
   }
 }

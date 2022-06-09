@@ -32,16 +32,25 @@ export class EstablishmentService {
 
     switch (category?.id) {
       case 1:
-        path += 'unidade-basica-saude.svg';
+        path += 'unidade-basica-saude.png';
         break;
       case 2:
         path += 'central-gestao.png';
         break;
+      case 3:
+        path += 'central-regulacao.png';
+        break;
       case 4:
         path += 'central-abastecimento.png';
         break;
+      case 5:
+        path += 'central-transplante.png';
+        break;
       case 6:
         path += 'hospital.png';
+        break;
+      case 7:
+        path += 'centro-obstetricia.png';
         break;
       case 8:
         path += 'pronto-atendimento.png';
@@ -51,6 +60,18 @@ export class EstablishmentService {
         break;
       case 10:
         path += 'hematologia.png';
+        break;
+      case 11:
+        path += 'telessaude.png';
+        break;
+      case 12:
+        path += 'atencao-domiciliar.png';
+        break;
+      case 13:
+        path += 'prevencao.png';
+        break;
+      case 14:
+        path += 'casa-apoio.png';
         break;
       case 15:
         path += 'reabilitacao.png';
@@ -70,11 +91,23 @@ export class EstablishmentService {
       case 20:
         path += 'protese-dentaria.png';
         break;
+      case 21:
+        path += 'zoonoses.png';
+        break;
+      case 22:
+        path += 'laboratorio-saude-publica.png';
+        break;
+      case 23:
+        path += 'trabalhador.png';
+        break;
+      case 24:
+        path += 'servico-obito.png';
+        break;
       case 25:
         path += 'imunizacao.png';
         break;
       default:
-        path += 'user-location.svg';
+        path += 'ambulatorio.png';
         break;
     }
 

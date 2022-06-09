@@ -56,6 +56,7 @@ export class MapComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.loadGoogleMapApi();
     await this.setUserLocalizationMarker();
+    this.searchEstablishmentsNearby(this.user.localization);
   }
 
   async loadGoogleMapApi(): Promise<void> {
@@ -108,7 +109,7 @@ export class MapComponent implements OnInit {
   getIconPathByCategory(category: EstablishmentCategory): google.maps.Icon {
     return {      
       url: this.establishmentService.getIconPathByCategory(category),
-      scaledSize: new google.maps.Size(60, 60),
+      scaledSize: new google.maps.Size(50, 50),
     };
   }
 
@@ -130,6 +131,7 @@ export class MapComponent implements OnInit {
   }
 
   onCenterMapChanged(): void {
+    console.log('dispara');
     const centerMap = this.googleMap.getCenter();
     const localization = new Localization(centerMap.lat(), centerMap.lng());
 

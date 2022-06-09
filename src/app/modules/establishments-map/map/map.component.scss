@@ -23,6 +23,7 @@
 
   .establishment-modal {
     .mat-dialog-container {
+      max-width: 500px;
       background: rgba($color: #fff, $alpha: 0.7);
       backdrop-filter: blur(6px) brightness(115%);
       border-radius: 10px;
