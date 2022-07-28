@@ -3,7 +3,7 @@ export * from './city.model';
 export * from './establishment.model';
 export * from './establishment-category.model';
 export * from './localization.model';
-export * from './office-hour.model';
+export * from './opening-hours.model';
 export * from './professional.model';
 export * from './specialty.model';
 export * from './user.model';

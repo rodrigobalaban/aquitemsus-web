@@ -1,7 +1,7 @@
-import { OfficeHour } from './office-hour.model';
+import { OpeningHours } from './opening-hours.model';
 
-describe('OfficeHour', () => {
+describe('OpeningHours', () => {
   it('should create an instance', () => {
-    expect(new OfficeHour()).toBeTruthy();
+    expect(new OpeningHours()).toBeTruthy();
   });
 });

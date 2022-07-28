@@ -16,7 +16,7 @@ export class EstablishmentService {
   ): Promise<Establishment[]> {
     return this.httpClient
       .get<Establishment[]>(
-        `${environment.apiUrl}/establishments?latitude=${localization.latitude}&longitude=${localization.longitude}&distance=${distance}`
+        `${environment.apiUrl}/establishments/localization?latitude=${localization.latitude}&longitude=${localization.longitude}&distance=${distance}`
       )
       .toPromise();
   }

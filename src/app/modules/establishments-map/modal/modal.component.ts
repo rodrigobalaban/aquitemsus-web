@@ -28,35 +28,35 @@ export class ModalComponent {
     );
   }
 
-  getWeekdayDescription(dayOfWeek: number): string {
+  getWeekdayDescription(dayOfWeek: string): string {
     let dayDescription = '';
 
     switch (dayOfWeek) {
-      case 0: {
+      case 'Sunday': {
         dayDescription = 'Domingo';
         break;
       }
-      case 1: {
+      case 'Monday': {
         dayDescription = 'Segunda';
         break;
       }
-      case 2: {
+      case 'Tuesday': {
         dayDescription = 'Terça';
         break;
       }
-      case 3: {
+      case 'Wednesday': {
         dayDescription = 'Quarta';
         break;
       }
-      case 4: {
+      case 'Thursday': {
         dayDescription = 'Quinta';
         break;
       }
-      case 5: {
+      case 'Friday': {
         dayDescription = 'Sexta';
         break;
       }
-      case 6: {
+      case 'Saturday': {
         dayDescription = 'Sábado';
         break;
       }
