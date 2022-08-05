@@ -54,6 +54,12 @@
             </div>
         </div>
     </div>
+
+    <div *ngIf="establishment.scheduling" class="scheduling">
+        <button type="button" mat-flat-button color="primary" class="button-primary" routerLink="/login">
+            Agendar Atendimento
+        </button>
+    </div>
 </div>
 
 <ng-template #loading>
