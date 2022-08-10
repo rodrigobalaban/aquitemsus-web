@@ -1,0 +1,19 @@
+<div id="new-schedule">
+    <div class="actions">
+        <button mat-icon-button aria-label="Voltar" (click)="backPage()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </div>
+
+    <div *ngIf="establishment" class="content">
+        <div class="schedule-form">
+            <div class="establishment">
+                <h5 class="category" [ngClass]="'category-id-' + establishment.category.id">
+                    {{ establishment.category.name }}
+                </h5>
+                <h3 class="name">{{ establishment.name }}</h3>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { ScreenWithToolbarComponent } from './layout';
 
 const routes: Routes = [
@@ -14,6 +15,14 @@ const routes: Routes = [
             (m) => m.EstablishmentsMapModule
           ),
       },
+      {
+        path: 'agendamentos',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/schedule').then(
+            (m) => m.ScheduleModule
+          ),
+      }
     ],
   },
   {

@@ -4,6 +4,6 @@ export class Professional {
   constructor(
     public id: number,
     public name: string,
-    public specialties: Specialty[]
+    public specialty: Specialty
   ) {}
 }

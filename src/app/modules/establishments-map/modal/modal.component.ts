@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Establishment, Specialty } from 'src/app/shared';
 import { EstablishmentService } from '../services';
 
@@ -17,13 +18,15 @@ export class ModalComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private establishmentService: EstablishmentService
+    private _dialogRef: MatDialogRef<ModalComponent>,
+    private _establishmentService: EstablishmentService,
+    private _router: Router
   ) {
     this.getEstablishmentDetails(data.establishment);
   }
 
   async getEstablishmentDetails(establishment: Establishment): Promise<void> {
-    this.establishment = this.establishmentService.getEstablishmentbyId(
+    this.establishment = this._establishmentService.getEstablishmentbyId(
       establishment.id
     );
   }
@@ -84,5 +87,16 @@ export class ModalComponent {
     }
 
     return path;
+  }
+
+  scheduleAppointment(id: number): void {
+    this.closeDialog();
+    this._router.navigate(['agendamentos', 'novo'], {
+      queryParams: { estabelecimento: id },
+    });
+  }
+
+  closeDialog(): void {
+    this._dialogRef.close();
   }
 }
