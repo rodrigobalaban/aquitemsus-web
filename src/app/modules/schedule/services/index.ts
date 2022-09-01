@@ -1,1 +1,2 @@
-export * from './new-schedule.service';
+export * from './schedule-session.service';
+export * from './schedule.service';

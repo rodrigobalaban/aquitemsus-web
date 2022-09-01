@@ -5,6 +5,7 @@ export * from './establishment-category.model';
 export * from './localization.model';
 export * from './opening-hours.model';
 export * from './professional.model';
+export * from './schedule';
 export * from './specialty.model';
 export * from './user.model';
 export * from './user-sus.model';

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Establishment, Professional, Specialty } from 'src/app/shared';
-import { NewScheduleService } from '../../services';
+import { ScheduleSessionService } from '../../services';
 
 @Component({
   selector: 'app-professional',
@@ -15,11 +15,11 @@ export class ProfessionalComponent {
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _newScheduleService: NewScheduleService,
+    private _scheduleSessionService: ScheduleSessionService,
     private _router: Router
   ) {
-    this.establishment = this._newScheduleService.establishment!;
-    this.specialty = this._newScheduleService.specialty!;
+    this.establishment = this._scheduleSessionService.establishment!;
+    this.specialty = this._scheduleSessionService.specialty!;
 
     this.findProfessionals();
   }
@@ -31,7 +31,7 @@ export class ProfessionalComponent {
   }
 
   onSelected(professional: Professional) {
-    this._newScheduleService.professional = professional;
+    this._scheduleSessionService.professional = professional;
     this._router.navigate(['../data'], {
       relativeTo: this._activatedRoute,
     });

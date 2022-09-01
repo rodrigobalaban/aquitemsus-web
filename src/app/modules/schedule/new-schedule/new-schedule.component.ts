@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import { Establishment } from 'src/app/shared';
 import { EstablishmentService } from '../../establishments-map';
-import { NewScheduleService } from '../services';
+import { ScheduleSessionService } from '../services';
 
 @Component({
   selector: 'app-new-schedule',
@@ -17,23 +17,37 @@ export class NewScheduleComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _establishmentService: EstablishmentService,
     private _location: Location,
-    private _newScheduleService: NewScheduleService,
+    private _scheduleSessionService: ScheduleSessionService,
     private _router: Router
   ) {}
 
   async ngOnInit(): Promise<void> {
-    const id: number = this._activatedRoute.snapshot.queryParams.estabelecimento;
-    await this.findEstablishment(id);
-    this._router.navigate(['especialidade'], {
-      relativeTo: this._activatedRoute,
-    });
+    const id: number =
+      this._activatedRoute.snapshot.queryParams.estabelecimento;
+
+    if (id) {
+      await this.findEstablishment(id);
+
+      this._router.navigate(['especialidade'], {
+        relativeTo: this._activatedRoute,
+      });
+
+      return;
+    }
+
+    const establishmentSession = this._scheduleSessionService.establishment;
+
+    if (establishmentSession) {
+      this.establishment = establishmentSession;
+    }
   }
 
   async findEstablishment(id: number) {
     this.establishment = await this._establishmentService.getEstablishmentbyId(
       id
     );
-    this._newScheduleService.establishment = this.establishment;
+
+    this._scheduleSessionService.establishment = this.establishment;
   }
 
   backPage(): void {

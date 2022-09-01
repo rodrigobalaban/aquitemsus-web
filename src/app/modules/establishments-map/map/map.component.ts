@@ -56,7 +56,7 @@ export class MapComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.loadGoogleMapApi();
     await this.setUserLocalizationMarker();
-    this.searchEstablishmentsNearby(this.user.localization);
+    this.searchEstablishmentsNearby(this.user.localization!);
   }
 
   async loadGoogleMapApi(): Promise<void> {

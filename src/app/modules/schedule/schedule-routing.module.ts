@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
   DateComponent,
+  HoursComponent,
   NewScheduleComponent,
   ProfessionalComponent,
   SpecialtyComponent,
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'especialidade', component: SpecialtyComponent },
       { path: 'profissional', component: ProfessionalComponent },
       { path: 'data', component: DateComponent },
+      { path: 'hora', component: HoursComponent },
     ],
   },
 ];
