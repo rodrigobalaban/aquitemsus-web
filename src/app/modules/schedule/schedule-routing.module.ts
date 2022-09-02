@@ -7,8 +7,13 @@ import {
   ProfessionalComponent,
   SpecialtyComponent,
 } from './new-schedule';
+import { ScheduleListComponent } from './schedule-list';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: ScheduleListComponent,
+  },
   {
     path: 'novo',
     component: NewScheduleComponent,

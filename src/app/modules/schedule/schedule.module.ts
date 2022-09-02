@@ -11,6 +11,7 @@ import { ProfessionalComponent } from './new-schedule/professional/professional.
 import { DateComponent } from './new-schedule/date/date.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HoursComponent } from './new-schedule/hours/hours.component';
+import { ScheduleListComponent } from './schedule-list/schedule-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HoursComponent } from './new-schedule/hours/hours.component';
     SpecialtyComponent,
     ProfessionalComponent,
     DateComponent,
-    HoursComponent
+    HoursComponent,
+    ScheduleListComponent
   ],
   imports: [
     CommonModule,

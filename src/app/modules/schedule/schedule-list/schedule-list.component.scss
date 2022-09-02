@@ -1,0 +1,78 @@
+.page-with-padding {
+  height: 100%;
+}
+
+.padding {
+  padding: 1.5em;
+}
+
+.page-title {
+  font-weight: bold;
+}
+
+.schedules {
+  display: grid;
+  gap: 1.5em;
+}
+
+.schedule {
+  display: flex;
+  position: relative;
+  padding-left: 36px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+
+  &.Reserved {
+    background: #f3c975;
+  }
+
+  &.Confirmed {
+    background: var(--gradient-primary);
+  }
+
+  &.Canceled {
+    background: #f44336;
+  }
+
+  .status {
+    align-self: center;
+    transform: rotate(270deg);
+    margin-left: -54px;
+    font-weight: bold;
+    position: absolute;
+    color: #fff;
+  }
+
+  .details {
+    background: #fff;
+    padding: 1em;
+    border-radius: 5px;
+    flex: 1;
+
+    p {
+      margin: 0;
+    }
+
+    .professional {
+      margin: 1em 0;
+    }
+
+    .establishment,
+    .professional {
+      label {
+        font-size: 0.8em;
+        font-weight: bold;
+      }
+
+      p {
+        font-weight: bold;
+        color: #000;
+      }
+    }
+
+    .professional label,
+    .date {
+      color: #909090;
+    }
+  }
+}

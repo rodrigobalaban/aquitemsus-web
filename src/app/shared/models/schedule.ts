@@ -6,7 +6,7 @@ export interface Schedule {
     id: number | null;
     establishment: Establishment | null;
     date: string | null;
-    status: number | null;
+    status: string | null;
     userSus: UserSUS | null;
     professional: Professional | null;
 }

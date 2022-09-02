@@ -14,6 +14,14 @@ export class ScheduleService extends BaseService<Schedule> {
     super(http);
   }
 
+  getAll(userId: number): Promise<Schedule[]> {
+    return this.http
+      .get<Schedule[]>(
+        `${environment.apiUrl}/${this.moduleUrl}/user?userId=${userId}`
+      )
+      .toPromise();
+  }
+
   getDaysOfMonthWithSchedules(
     month: number,
     year: number,
