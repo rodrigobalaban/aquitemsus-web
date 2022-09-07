@@ -7,6 +7,7 @@ export * from './opening-hours.model';
 export * from './professional.model';
 export * from './schedule';
 export * from './specialty.model';
+export * from './token-cloud-message';
 export * from './user.model';
 export * from './user-sus.model';
 export * from './user-login';

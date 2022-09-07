@@ -15,6 +15,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthTokenInterceptor } from './shared/http';
 
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
+
 import { registerLocaleData } from '@angular/common';
 import pt from '@angular/common/locales/pt';
 

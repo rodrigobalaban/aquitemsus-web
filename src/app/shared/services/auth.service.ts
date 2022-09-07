@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { UserLogin, UserToken } from '../models';
+import { UserLogin, UserSUS, UserToken } from '../models';
 import { tap } from 'rxjs/operators';
+import { TokenCloudMessageService } from './token-cloud-message.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  private readonly sessionStorage = 'USER_AUTH_AQUITEMSUS_APP';
+  private readonly keyLocalStorage = 'USER_AUTH_AQUITEMSUS_APP';
 
-  constructor(private _http: HttpClient) {}
+  constructor(
+    private _http: HttpClient,
+    private _tokenCloudMessageService: TokenCloudMessageService
+  ) {}
 
   get isAuthenticated(): boolean {
     return this.tokenIsValid();
@@ -24,12 +28,22 @@ export class AuthService {
   authenticate(userLogin: UserLogin): Promise<UserToken> {
     return this._http
       .post<UserToken>(`${environment.apiUrl}/auth`, userLogin)
-      .pipe(tap((credential) => this.saveUserAuthSession(credential)))
+      .pipe(
+        tap((credential) => {
+          this.saveUserAuthSession(credential);
+          this.saveCloudMessageTokenInBackend();
+        })
+      )
       .toPromise();
   }
 
   private saveUserAuthSession(userToken: UserToken): void {
-    localStorage.setItem(this.sessionStorage, JSON.stringify(userToken));
+    localStorage.setItem(this.keyLocalStorage, JSON.stringify(userToken));
+  }
+
+  private async saveCloudMessageTokenInBackend(): Promise<void> {
+    const userSus: UserSUS = { id: this.getUserSession().id };
+    await this._tokenCloudMessageService.saveTokenInBackend(userSus);
   }
 
   private tokenIsValid(): boolean {
@@ -41,9 +55,7 @@ export class AuthService {
   }
 
   getUserSession(): UserToken {
-    return JSON.parse(
-      localStorage.getItem(this.sessionStorage)!
-    ) as UserToken;
+    return JSON.parse(localStorage.getItem(this.keyLocalStorage)!) as UserToken;
   }
 
   logout(): void {
