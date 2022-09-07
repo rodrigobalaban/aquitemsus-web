@@ -5,4 +5,5 @@ export enum ScheduleStatus {
   Complete = 'Complete',
   Absent = 'Absent',
   Canceled = 'Canceled',
+  Rated = 'Rated'
 }

@@ -12,7 +12,10 @@ import { DateComponent } from './new-schedule/date/date.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HoursComponent } from './new-schedule/hours/hours.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
-
+import { RatingComponent } from './rating/rating.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -21,15 +24,20 @@ import { ScheduleListComponent } from './schedule-list/schedule-list.component';
     ProfessionalComponent,
     DateComponent,
     HoursComponent,
-    ScheduleListComponent
+    ScheduleListComponent,
+    RatingComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
     MatButtonModule,
     MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatNativeDateModule,
     MatIconModule,
-    ScheduleRoutingModule
-  ]
+    ReactiveFormsModule,
+    ScheduleRoutingModule,
+  ],
 })
-export class ScheduleModule { }
+export class ScheduleModule {}

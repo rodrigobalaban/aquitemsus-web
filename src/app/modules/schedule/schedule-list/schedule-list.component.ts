@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Schedule, UserToken } from 'src/app/shared/models';
 import { ScheduleStatus } from 'src/app/shared/models/enums';
 import { AuthService } from 'src/app/shared/services';
@@ -15,6 +16,7 @@ export class ScheduleListComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
+    private _router: Router,
     private _scheduleService: ScheduleService
   ) {
     this.user = this._authService.getUserSession();
@@ -32,7 +34,11 @@ export class ScheduleListComponent implements OnInit {
     return new Date(dateISOString);
   }
 
-  canEvaluate(status: ScheduleStatus) {
+  canRating(status: ScheduleStatus) {
     return status === ScheduleStatus.Complete;
+  }
+
+  rate(scheduleId: number) {
+    this._router.navigate(['agendamentos', 'avaliar', scheduleId]);
   }
 }

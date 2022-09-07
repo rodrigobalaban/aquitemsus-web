@@ -237,3 +237,15 @@ a {
     color: #9a9a9a;
   }
 }
+
+.page-with-padding {
+  height: 100%;
+
+  .padding {
+    padding: 1.5em;
+  }
+
+  .page-title {
+    font-weight: bold;
+  }
+}

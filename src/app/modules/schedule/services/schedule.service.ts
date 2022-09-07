@@ -66,6 +66,8 @@ export class ScheduleService extends BaseService<Schedule> {
         return 'Ausente';
       case ScheduleStatus.Canceled:
         return 'Cancelado';
+      case ScheduleStatus.Rated:
+        return 'Avaliado';
       default:
         return '';
     }

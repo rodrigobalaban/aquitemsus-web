@@ -1,15 +1,3 @@
-.page-with-padding {
-  height: 100%;
-}
-
-.padding {
-  padding: 1.5em;
-}
-
-.page-title {
-  font-weight: bold;
-}
-
 .schedules {
   display: grid;
   gap: 1.5em;
@@ -30,7 +18,7 @@
     background: var(--gradient-primary);
   }
 
-  &.Complete {
+  &.Complete, &.Rated {
     background: #8dca53;
   }
 
@@ -92,7 +80,7 @@
       align-items: center;
     }
 
-    .mat-evaluate {
+    .mat-rating {
       background-color: #fff5dd;
       color: #f5ba45;
       font-weight: bold;

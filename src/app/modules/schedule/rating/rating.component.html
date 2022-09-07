@@ -1,0 +1,54 @@
+<div class="page-with-padding">
+  <div class="padding">
+    <div class="actions">
+      <button mat-icon-button aria-label="Voltar" (click)="returnToList()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <h1 class="page-title">Avaliar Atendimento</h1>
+
+    <div *ngIf="establishment" class="content">
+      <form class="rating-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="establishment">
+          <h5 class="category" [ngClass]="'category-id-' + establishment.category.id">
+            {{ establishment.category.name }}
+          </h5>
+          <h3 class="name">{{ establishment.name }}</h3>
+        </div>
+
+        <div id="stars">
+          <button type="button" mat-icon-button color="star" (click)="setStarValue(1)">
+            <mat-icon>{{ starValue >= 1 ? 'star' : 'star_outline' }}</mat-icon>
+          </button>
+          <button type="button" mat-icon-button color="star" (click)="setStarValue(2)">
+            <mat-icon>{{ starValue >= 2 ? 'star' : 'star_outline' }}</mat-icon>
+          </button>
+          <button type="button" mat-icon-button color="star" (click)="setStarValue(3)">
+            <mat-icon>{{ starValue >= 3 ? 'star' : 'star_outline' }}</mat-icon>
+          </button>
+          <button type="button" mat-icon-button color="star" (click)="setStarValue(4)">
+            <mat-icon>{{ starValue >= 4 ? 'star' : 'star_outline' }}</mat-icon>
+          </button>
+          <button type="button" mat-icon-button color="star" (click)="setStarValue(5)">
+            <mat-icon>{{ starValue === 5 ? 'star' : 'star_outline' }}</mat-icon>
+          </button>
+        </div>
+
+        <div id="comment">
+          <mat-form-field appearance="outline">
+            <mat-label>Deixe um comentário</mat-label>
+            <textarea matInput placeholder="Descreva sua avaliação..." formControlName="comment"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div id="submit">
+          <button type="submit" mat-flat-button color="primary" class="button-primary">
+            Enviar Avaliação
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

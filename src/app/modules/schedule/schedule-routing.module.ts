@@ -7,6 +7,7 @@ import {
   ProfessionalComponent,
   SpecialtyComponent,
 } from './new-schedule';
+import { RatingComponent } from './rating';
 import { ScheduleListComponent } from './schedule-list';
 
 const routes: Routes = [
@@ -22,6 +23,15 @@ const routes: Routes = [
       { path: 'profissional', component: ProfessionalComponent },
       { path: 'data', component: DateComponent },
       { path: 'hora', component: HoursComponent },
+    ],
+  },
+  {
+    path: 'avaliar',
+    children: [
+      {
+        path: ':id',
+        component: RatingComponent,
+      },
     ],
   },
 ];

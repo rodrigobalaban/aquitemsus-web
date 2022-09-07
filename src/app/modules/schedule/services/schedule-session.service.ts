@@ -91,6 +91,7 @@ export class ScheduleSessionService {
         professional: null,
         status: null,
         userSus: null,
+        rating: null,
       };
     }
 
