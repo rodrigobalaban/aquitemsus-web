@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Schedule } from 'src/app/shared';
+import { ScheduleStatus } from 'src/app/shared/models/enums';
 import { BaseService } from 'src/app/shared/services';
 import { environment } from 'src/environments/environment';
 
@@ -49,5 +50,24 @@ export class ScheduleService extends BaseService<Schedule> {
         `${environment.apiUrl}/${this.moduleUrl}?day=${day}&month=${month}&year=${year}&idEstablishment=${idEstablishment}&idProfessional=${idProfessional}`
       )
       .toPromise();
+  }
+
+  getScheduleStatusDescription(status: ScheduleStatus): string {
+    switch (status) {
+      case ScheduleStatus.Available:
+        return 'Disponível';
+      case ScheduleStatus.Reserved:
+        return 'Reservado';
+      case ScheduleStatus.Confirmed:
+        return 'Confirmado';
+      case ScheduleStatus.Complete:
+        return 'Concluído';
+      case ScheduleStatus.Absent:
+        return 'Ausente';
+      case ScheduleStatus.Canceled:
+        return 'Cancelado';
+      default:
+        return '';
+    }
   }
 }

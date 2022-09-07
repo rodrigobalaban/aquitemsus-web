@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Schedule, UserToken } from 'src/app/shared/models';
+import { ScheduleStatus } from 'src/app/shared/models/enums';
 import { AuthService } from 'src/app/shared/services';
 import { ScheduleService } from '../services';
 
@@ -23,24 +24,15 @@ export class ScheduleListComponent implements OnInit {
     this.schedules = await this._scheduleService.getAll(this.user.id!);
   }
 
-  getStatusDescription(status: string): string {
-    switch (status) {
-      case 'Available':
-        return 'Disponível';
-      case 'Reserved':
-        return 'Reservado';
-      case 'Confirmed':
-        return 'Confirmado';
-      case 'Complete':
-        return 'Completo';
-      case 'Canceled':
-        return 'Cancelado';
-      default:
-        return '';
-    }
+  getStatusDescription(status: ScheduleStatus): string {
+    return this._scheduleService.getScheduleStatusDescription(status);
   }
 
   toDate(dateISOString: string): Date {
     return new Date(dateISOString);
+  }
+
+  canEvaluate(status: ScheduleStatus) {
+    return status === ScheduleStatus.Complete;
   }
 }
