@@ -1,0 +1,38 @@
+#user {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #909090;
+    background-color: #e1e1e1;
+    border-radius: 15px;
+    width: 75px;
+    height: 75px;
+
+    .mat-icon {
+      font-size: 45px;
+      width: 45px;
+      height: 45px;
+    }
+  }
+
+  .name {
+    h2 {
+      font-weight: bold;
+      margin: 0;
+    }
+  }
+}
+
+.mat-divider {
+  margin: 1.5em 0;
+}
+
+#profile-menu {
+  display: flex;
+  flex-direction: column;
+}

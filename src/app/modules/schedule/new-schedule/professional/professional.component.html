@@ -1,7 +1,7 @@
-<div id="professionals" class="step">
+<div id="professionals" class="step menu-button">
     <h2 class="selected-option">{{ specialty.name }}</h2>
     <h3 class="label">Selecione um Profissional:</h3>
-    <button mat-raised-button *ngFor="let professional of professionals" class="option professional" (click)="onSelected(professional)">
+    <button mat-raised-button *ngFor="let professional of professionals" class="menu-option professional" (click)="onSelected(professional)">
         {{ professional.name }}
     </button>
 </div>

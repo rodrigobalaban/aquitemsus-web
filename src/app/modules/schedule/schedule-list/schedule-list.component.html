@@ -1,34 +1,36 @@
 <div class="page-with-padding">
-  <div class="padding">
-    <h1 class="page-title">Meus Agendamentos</h1>
-    <div class="schedules">
-      <div *ngFor="let schedule of schedules" class="schedule" [ngClass]="schedule.status!">
-        <div class="status">{{ getStatusDescription(schedule.status!) }}</div>
-        <div class="details">
-          <div class="establishment">
-            <label class="category-id-{{ schedule.establishment?.category?.id }}">{{
-              schedule.establishment?.category?.name }}</label>
-            <p>{{ schedule.establishment!.name }}</p>
-          </div>
-          <div class="professional">
-            <label>Profissional:</label>
-            <p>{{ schedule.professional?.name }}</p>
-          </div>
-          <div class="bottom-row">
-            <div class="date">
-              <p>{{ toDate(schedule.date!) | date: 'dd/MM/yyyy - HH:mm' }}h.</p>
+  <div class="content">
+    <div class="padding">
+      <h1 class="page-title">Meus Agendamentos</h1>
+      <div class="schedules">
+        <div *ngFor="let schedule of schedules" class="schedule" [ngClass]="schedule.status!">
+          <div class="status">{{ getStatusDescription(schedule.status!) }}</div>
+          <div class="details">
+            <div class="establishment">
+              <label class="category-id-{{ schedule.establishment?.category?.id }}">{{
+                schedule.establishment?.category?.name }}</label>
+              <p>{{ schedule.establishment!.name }}</p>
             </div>
-            <div *ngIf="canRating(schedule.status!)" class="rating">
-              <button mat-flat-button color="rating" (click)="rate(schedule.id!)">
-                <mat-icon>star_outline</mat-icon>
-                <span>Avaliar</span>
-              </button>
+            <div class="professional">
+              <label>Profissional:</label>
+              <p>{{ schedule.professional?.name }}</p>
             </div>
-            <div *ngIf="schedule.rating">
-              <button mat-flat-button color="rating">
-                <mat-icon>star_outline</mat-icon>
-                <span>{{ schedule.rating.value }}</span>
-              </button>
+            <div class="bottom-row">
+              <div class="date">
+                <p>{{ toDate(schedule.date!) | date: 'dd/MM/yyyy - HH:mm' }}h.</p>
+              </div>
+              <div *ngIf="canRating(schedule.status!)" class="rating">
+                <button mat-flat-button color="rating" (click)="rate(schedule.id!)">
+                  <mat-icon>star_outline</mat-icon>
+                  <span>Avaliar</span>
+                </button>
+              </div>
+              <div *ngIf="schedule.rating">
+                <button mat-flat-button color="rating">
+                  <mat-icon>star_outline</mat-icon>
+                  <span>{{ schedule.rating.value }}</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

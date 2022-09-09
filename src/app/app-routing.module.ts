@@ -19,10 +19,14 @@ const routes: Routes = [
         path: 'agendamentos',
         canActivate: [AuthGuard],
         loadChildren: () =>
-          import('./modules/schedule').then(
-            (m) => m.ScheduleModule
-          ),
-      }
+          import('./modules/schedule').then((m) => m.ScheduleModule),
+      },
+      {
+        path: 'meu-perfil',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/my-profile').then((m) => m.MyProfileModule),
+      },
     ],
   },
   {
