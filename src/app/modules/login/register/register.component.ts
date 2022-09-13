@@ -38,7 +38,7 @@ export class RegisterComponent {
     }
 
     const user: User = this.form.getRawValue();
-    await this._userService.register(user);
+    await this._userService.save(user);
 
     this._messageService.show('Cadastro realizado com sucesso');
     this._router.navigate(['/login']);

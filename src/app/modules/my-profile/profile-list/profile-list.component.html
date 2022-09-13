@@ -14,7 +14,7 @@
       <mat-divider></mat-divider>
 
       <div id="profile-menu" class="menu-button">
-        <button mat-raised-button class="menu-option">
+        <button mat-raised-button class="menu-option" [routerLink]="['meus-dados']">
           Meus Dados
         </button>
         <button mat-raised-button class="menu-option" [routerLink]="['/agendamentos']">
@@ -22,6 +22,9 @@
         </button>
         <button mat-raised-button class="menu-option">
           Alterar Senha
+        </button>
+        <button mat-raised-button class="menu-option" (click)="logout()">
+          Sair
         </button>
       </div>
     </div>

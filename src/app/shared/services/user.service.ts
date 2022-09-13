@@ -1,27 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { User } from '../models';
+import { User, UserSUS } from '../models';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  moduleUrl = 'users';
+export class UserService extends BaseService<UserSUS> {
+  moduleUrl = 'users/sus';
 
-  constructor(private _http: HttpClient) {}
+  constructor(protected http: HttpClient) {
+    super(http);
+  }
 
-  register(user: User): Promise<User> {
-    return this._http
-      .post<User>(
-        `${environment.apiUrl}/${this.moduleUrl}/register-user`,
-        JSON.stringify(user)
-      )
-      .toPromise();
+  delete(idEntity: number): Promise<void> {
+    throw Error('Method not available');
   }
 
   resetPassword(userEmail: string): Promise<void> {
-    return this._http
+    return this.http
       .post<void>(
         `${environment.apiUrl}/${this.moduleUrl}/reset-password`,
         userEmail
