@@ -15,6 +15,7 @@ import {
 } from '../services';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-map',
@@ -28,6 +29,7 @@ export class MapComponent implements OnInit {
 
   establishmentsList: Establishment[] | undefined;
   establishmentSelected: Establishment | undefined;
+  specialtiesIds: number[] = [];
 
   lastLocationSearched?: Localization;
   readonly DISTANCE_KM = 4;
@@ -47,20 +49,30 @@ export class MapComponent implements OnInit {
   userLocalizationMarker!: google.maps.LatLng;
 
   constructor(
-    private establishmentService: EstablishmentService,
-    private googleMapsService: GoogleMapsService,
-    private localizationService: LocalizationService,
-    private modalService: MatDialog
+    private _activatedRoute: ActivatedRoute,
+    private _establishmentService: EstablishmentService,
+    private _googleMapsService: GoogleMapsService,
+    private _localizationService: LocalizationService,
+    private _modalService: MatDialog
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.checkQueryParams();
     await this.loadGoogleMapApi();
     await this.setUserLocalizationMarker();
     this.searchEstablishmentsNearby(this.user.localization!);
   }
 
+  checkQueryParams(): void {
+    const specialties: number[] = this._activatedRoute.snapshot.queryParams.specialties;
+
+    if (specialties) {
+      this.specialtiesIds = specialties;
+    }
+  }
+
   async loadGoogleMapApi(): Promise<void> {
-    this.googleApiLoaded = await this.googleMapsService.loadGoogleMapApi();
+    this.googleApiLoaded = await this._googleMapsService.loadGoogleMapApi();
   }
 
   async setUserLocalizationMarker(): Promise<void> {
@@ -74,7 +86,7 @@ export class MapComponent implements OnInit {
   }
 
   async captureUserLocalization(): Promise<Localization> {
-    return await this.localizationService.getUserLocalization();
+    return await this._localizationService.getUserLocalization();
   }
 
   convertLocalizationToGoogleFormat(
@@ -96,19 +108,21 @@ export class MapComponent implements OnInit {
     this.lastLocationSearched = localization;
 
     this.establishmentsList =
-      await this.establishmentService.getNearbyEstablishments(
+      await this._establishmentService.getNearbyEstablishments(
         localization,
-        this.DISTANCE_KM
+        this.DISTANCE_KM,
+        this.specialtiesIds
       );
   }
 
   centralizeMapOnEstablishmentLocalization(establishment: Establishment) {
+    this.searchEstablishmentsNearby(establishment.localization);
     this.centralizeMapOn(establishment.localization);
   }
 
   getIconPathByCategory(category: EstablishmentCategory): google.maps.Icon {
-    return {      
-      url: this.establishmentService.getIconPathByCategory(category),
+    return {
+      url: this._establishmentService.getIconPathByCategory(category),
       scaledSize: new google.maps.Size(50, 50),
     };
   }
@@ -122,7 +136,7 @@ export class MapComponent implements OnInit {
   }
 
   openModalEstablishment(): void {
-    this.modalService.open(ModalComponent, {
+    this._modalService.open(ModalComponent, {
       data: {
         establishment: this.establishmentSelected,
       },
@@ -131,7 +145,6 @@ export class MapComponent implements OnInit {
   }
 
   onCenterMapChanged(): void {
-    console.log('dispara');
     const centerMap = this.googleMap.getCenter();
     const localization = new Localization(centerMap.lat(), centerMap.lng());
 
@@ -157,7 +170,7 @@ export class MapComponent implements OnInit {
   }
 
   distanceFromLastSearch(localization: Localization): number {
-    return this.localizationService.distanceInKm(
+    return this._localizationService.distanceInKm(
       localization,
       this.lastLocationSearched!
     );

@@ -23,6 +23,14 @@ export class ScheduleService extends BaseService<Schedule> {
       .toPromise();
   }
 
+  countUserSchedules(userId: number): Promise<number> {
+    return this.http
+      .get<number>(
+        `${environment.apiUrl}/${this.moduleUrl}/count-user?userId=${userId}`
+      )
+      .toPromise();
+  }
+
   getDaysOfMonthWithSchedules(
     month: number,
     year: number,

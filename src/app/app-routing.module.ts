@@ -10,6 +10,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/home').then(
+            (m) => m.HomeModule
+          ),
+      },
+      {
+        path: 'mapa',
         loadChildren: () =>
           import('./modules/establishments-map').then(
             (m) => m.EstablishmentsMapModule

@@ -1,6 +1,11 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Establishment } from 'src/app/shared';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {
+  Establishment,
+  EstablishmentCategory,
+  Localization,
+} from 'src/app/shared';
 import { EstablishmentService } from '../services';
 
 @Component({
@@ -9,22 +14,39 @@ import { EstablishmentService } from '../services';
   styleUrls: ['./search-box.component.scss'],
 })
 export class SearchBoxComponent implements OnInit {
+  @Input() localization!: Localization;
   @Output() onSelectEstablishment = new EventEmitter<Establishment>();
 
   searchControl = new FormControl();
   filteredEstablishments: Establishment[] = [];
 
   constructor(private establishmentService: EstablishmentService) {
-    this.searchControl.valueChanges.subscribe((searchString) =>
-      this.filterEstablishments(searchString)
-    );
+    this.searchControl.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((searchString) => this.filterEstablishments(searchString));
   }
 
   ngOnInit(): void {}
 
-  private async filterEstablishments(value: string): Promise<void> {}
+  private async filterEstablishments(search: string): Promise<void> {
+    this.filteredEstablishments =
+      await this.establishmentService.getAllEstablishments(
+        search,
+        this.localization,
+        0,
+        10
+      );
+  }
 
   emitEventEstablishmentSelected(establishment: Establishment): void {
     this.onSelectEstablishment.emit(establishment);
+  }
+
+  getIconSource(category: EstablishmentCategory): string {
+    return this.establishmentService.getIconPathByCategory(category);
+  }
+
+  clearInput(): void {
+    this.searchControl.setValue(null);
   }
 }

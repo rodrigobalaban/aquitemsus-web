@@ -1,0 +1,40 @@
+<div class="page-with-padding">
+  <div id="immunization" class="pointer" (click)="searchImmunizationEstablishments()">
+    <div class="icon">
+      <img src="assets/icons/map/imunizacao.png">
+    </div>
+    <span>Consulte locais para</span>
+    <h2>Imunização</h2>
+  </div>
+  <div id="shortcuts">
+    <div class="content">
+      <div id="schedule" class="white-card pointer" [routerLink]="['/agendamentos']">
+        <div class="text">
+          <h2 class="count">{{ countSchedules }}</h2>
+          <h3 class="title" [ngPlural]="countSchedules">
+            <ng-template ngPluralCase="=1">Atendimento Agendado</ng-template>
+            <ng-template ngPluralCase="other">Atendimentos Agendados</ng-template>
+          </h3>
+          <span>nos próximos dias</span>
+        </div>
+        <img src="assets/icons/map/ambulatorio.png">
+      </div>
+      <div class="row">
+        <div id="emergency" class="white-card pointer" (click)="searchEmergencyEstablishments()">
+          <img src="assets/icons/map/pronto-atendimento.png">
+          <div class="text">
+            <span>Buscar Estabelecimentos</span>
+            <h3 class="title">Emergência</h3>
+          </div>
+        </div>
+        <div id="medicine" class="white-card">
+          <img src="assets/icons/map/farmacia.png">
+          <div class="text">
+            <span>Próximos</span>
+            <h3 class="title">Medicamentos</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

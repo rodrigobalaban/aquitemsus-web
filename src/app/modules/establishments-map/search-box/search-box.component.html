@@ -2,14 +2,17 @@
     <mat-form-field class="search-field" appearance="outline">
         <mat-label>Buscar...</mat-label>
         <input matInput aria-label="Estabelecimento" [matAutocomplete]="auto" [formControl]="searchControl" />
+        <button *ngIf="searchControl.value" matSuffix mat-icon-button aria-label="Limpar" (click)="clearInput()">
+            <mat-icon>close</mat-icon>
+        </button>
 
         <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let establishment of filteredEstablishments" [value]="establishment.name"
-                (click)="emitEventEstablishmentSelected(establishment)">
-                <img class="establishment-icon" aria-hidden height="25"
-                    src="assets/icons/map/unidade-basica-saude.svg" />
+                (click)="emitEventEstablishmentSelected(establishment)" class="establishment">
+                <img class="establishment-icon" aria-hidden height="25" [src]="getIconSource(establishment.category)" />
                 <span>{{ establishment.name }}</span> -
-                <small>{{ establishment.category.name }}</small>
+                <small *ngIf="establishment.category" class="category"
+                    [ngClass]="'category-id-' + establishment.category.id">{{ establishment.category.name }}</small>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>

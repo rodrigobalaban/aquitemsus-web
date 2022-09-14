@@ -32,15 +32,19 @@
                 <a href="tel:{{ establishment.phone }}">{{ establishment.phone }}</a>
             </div>
         </div>
-        <div *ngIf="establishment.openingHours.length > 0" class="details-item">
+        <div *ngIf="establishment.openingHours.length > 0" class="details-item opening-hours">
             <mat-icon fontSet="material-icons-outlined">schedule</mat-icon>
-            <div>
-                <h5 class="title">Horário de Atendimento</h5>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h5 class="title">Horário de Atendimento</h5>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
                 <p *ngFor="let day of establishment.openingHours">
                     {{ getWeekdayDescription(day.dayOfWeek) }}: {{ day.openingTime.substring(0, 5) }}h. às {{
                     day.closingTime.substring(0, 5) }}h.
                 </p>
-            </div>
+            </mat-expansion-panel>
         </div>
     </div>
 
@@ -56,7 +60,8 @@
     </div>
 
     <div *ngIf="establishment.scheduling" class="scheduling">
-        <button type="button" mat-flat-button color="primary" class="button-primary" (click)="scheduleAppointment(establishment.id)">
+        <button type="button" mat-flat-button color="primary" class="button-primary"
+            (click)="scheduleAppointment(establishment.id)">
             Agendar Atendimento
         </button>
     </div>

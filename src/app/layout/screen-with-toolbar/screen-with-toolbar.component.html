@@ -5,13 +5,14 @@
 
   <footer>
     <mat-toolbar>
-      <button mat-icon-button aria-label="Example icon-button with share icon">
+      <button mat-icon-button [routerLink]="['/']" [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon fontSet="material-icons-outlined">home</mat-icon>
       </button>
       <button mat-icon-button aria-label="Example icon-button with share icon">
         <mat-icon fontSet="material-icons-outlined">schedule</mat-icon>
       </button>
-      <button mat-fab id="search-button" color="primary" [routerLink]="['/']">
+      <button mat-fab id="search-button" color="primary" [routerLink]="['/mapa']">
         <img src="assets/icons/internal/search.svg">
       </button>
       <button mat-icon-button [routerLink]="['/agendamentos']" [routerLinkActive]="'active'">
