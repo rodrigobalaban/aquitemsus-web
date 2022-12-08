@@ -32,7 +32,7 @@ export class UserService extends BaseService<UserSUS> {
   resetPassword(userEmail: string): Promise<void> {
     return this.httpWithoutInterceptor
       .post<void>(
-        `${environment.apiUrl}/${this.moduleUrl}/reset-password`,
+        `${environment.apiUrl}/users/reset-password`,
         userEmail
       )
       .toPromise();
