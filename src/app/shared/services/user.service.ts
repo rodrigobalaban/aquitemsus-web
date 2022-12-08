@@ -24,17 +24,15 @@ export class UserService extends BaseService<UserSUS> {
     return this.httpWithoutInterceptor
       .post<UserSUS>(
         `${environment.apiUrl}/${this.moduleUrl}`,
-        JSON.stringify(userSUS)
+        JSON.stringify(userSUS),
+        { headers: { 'Content-Type': 'application/json' } }
       )
       .toPromise();
   }
 
   resetPassword(userEmail: string): Promise<void> {
     return this.httpWithoutInterceptor
-      .post<void>(
-        `${environment.apiUrl}/users/reset-password`,
-        userEmail
-      )
+      .post<void>(`${environment.apiUrl}/users/reset-password`, userEmail)
       .toPromise();
   }
 }
