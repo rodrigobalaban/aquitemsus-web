@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
   private showMapWithSpecialty(specialtiesIds: number[]) {
     let queryParams: Params = { specialties: specialtiesIds.join(',') };
 
-    this._router.navigate(['/mapa'], {
+    this._router.navigate(['/'], {
       queryParams,
     });
   }
