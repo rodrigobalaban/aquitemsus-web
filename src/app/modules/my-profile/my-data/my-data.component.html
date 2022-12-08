@@ -1,0 +1,35 @@
+<div class="page-with-padding">
+  <div class="padding">
+    <div class="actions">
+      <button mat-icon-button aria-label="Voltar" (click)="navigateToProfileList()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div class="content">
+      <h1 class="page-title">Meus Dados</h1>
+      <form [formGroup]="form" class="user-form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="standard">
+          <mat-label>Nome</mat-label>
+          <input type="text" matInput placeholder="Nome" formControlName="name">
+          <mat-icon fontSet="material-icons-outlined" matPrefix>person</mat-icon>
+          <mat-error>
+            Informe um nome.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+          <mat-label>E-mail</mat-label>
+          <input type="email" class="input" matInput placeholder="E-mail" formControlName="email">
+          <mat-icon fontSet="material-icons-outlined" matPrefix>email</mat-icon>
+          <mat-error>
+            Informe um e-mail válido.
+          </mat-error>
+        </mat-form-field>
+        <div class="actions">
+          <button type="submit" mat-flat-button color="primary" class="button-primary">
+            Atualizar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

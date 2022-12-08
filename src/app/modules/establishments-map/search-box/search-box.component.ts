@@ -1,6 +1,22 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Establishment } from 'src/app/shared';
+import { ActivatedRoute } from '@angular/router';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {
+  Establishment,
+  EstablishmentCategory,
+  Localization,
+} from 'src/app/shared';
 import { EstablishmentService } from '../services';
 
 @Component({
@@ -8,23 +24,54 @@ import { EstablishmentService } from '../services';
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss'],
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent implements AfterViewInit {
+  @Input() localization!: Localization;
   @Output() onSelectEstablishment = new EventEmitter<Establishment>();
+
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   searchControl = new FormControl();
   filteredEstablishments: Establishment[] = [];
 
-  constructor(private establishmentService: EstablishmentService) {
-    this.searchControl.valueChanges.subscribe((searchString) =>
-      this.filterEstablishments(searchString)
-    );
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cdRef: ChangeDetectorRef,
+    private establishmentService: EstablishmentService
+  ) {
+    this.searchControl.valueChanges
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((searchString) => this.filterEstablishments(searchString));
   }
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    const focusOnSearch = this.activatedRoute.snapshot.queryParams.search;
 
-  private async filterEstablishments(value: string): Promise<void> {}
+    if (focusOnSearch) {
+      this.searchInput.nativeElement.focus();
+    }
+
+    this.cdRef.detectChanges();
+  }
+
+  private async filterEstablishments(search: string): Promise<void> {
+    this.filteredEstablishments =
+      await this.establishmentService.getAllEstablishments(
+        search,
+        this.localization,
+        0,
+        10
+      );
+  }
 
   emitEventEstablishmentSelected(establishment: Establishment): void {
     this.onSelectEstablishment.emit(establishment);
+  }
+
+  getIconSource(category: EstablishmentCategory): string {
+    return this.establishmentService.getIconPathByCategory(category);
+  }
+
+  clearInput(): void {
+    this.searchControl.setValue(null);
   }
 }

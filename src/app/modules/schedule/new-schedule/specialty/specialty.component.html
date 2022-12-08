@@ -1,0 +1,6 @@
+<div id="specialties" class="step menu-button">
+    <h3 class="label">Selecione uma Especialidade:</h3>
+    <button mat-raised-button *ngFor="let specialty of establishment.specialties" class="menu-option" (click)="onSelected(specialty)">
+        {{ specialty.name }}
+    </button>
+</div>

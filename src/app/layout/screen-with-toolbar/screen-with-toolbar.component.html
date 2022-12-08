@@ -5,19 +5,20 @@
 
   <footer>
     <mat-toolbar>
-      <button mat-icon-button aria-label="Example icon-button with share icon">
+      <button mat-icon-button [routerLink]="['/']" [routerLinkActive]="'active'"
+        [routerLinkActiveOptions]="{ exact: true }">
         <mat-icon fontSet="material-icons-outlined">home</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Example icon-button with share icon">
-        <mat-icon fontSet="material-icons-outlined">schedule</mat-icon>
+      <button mat-icon-button [routerLink]="['/mapa']" [routerLinkActive]="'active'">
+        <mat-icon fontSet="material-icons-outlined">map</mat-icon>
       </button>
-      <button mat-fab id="search-button" color="primary" aria-label="Example icon-button with share icon">
+      <button mat-fab id="search-button" color="primary" [routerLink]="['/mapa']" [queryParams]="{search: true}">
         <img src="assets/icons/internal/search.svg">
       </button>
-      <button mat-icon-button aria-label="Example icon-button with share icon">
+      <button mat-icon-button [routerLink]="['/agendamentos']" [routerLinkActive]="'active'">
         <mat-icon fontSet="material-icons-outlined">event</mat-icon>
       </button>
-      <button mat-icon-button aria-label="Example icon-button with share icon">
+      <button mat-icon-button [routerLink]="['/meu-perfil']" [routerLinkActive]="'active'">
         <mat-icon fontSet="material-icons-outlined">person</mat-icon>
       </button>
     </mat-toolbar>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 import { ScreenWithToolbarComponent } from './layout';
 
 const routes: Routes = [
@@ -9,12 +10,36 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/home').then(
+            (m) => m.HomeModule
+          ),
+      },
+      {
+        path: 'mapa',
         loadChildren: () =>
           import('./modules/establishments-map').then(
             (m) => m.EstablishmentsMapModule
           ),
       },
+      {
+        path: 'agendamentos',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/schedule').then((m) => m.ScheduleModule),
+      },
+      {
+        path: 'meu-perfil',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/my-profile').then((m) => m.MyProfileModule),
+      },
     ],
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./modules').then((m) => m.LoginModule),
   },
 ];
 

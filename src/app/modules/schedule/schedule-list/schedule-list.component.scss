@@ -1,0 +1,90 @@
+.schedules {
+  display: grid;
+  gap: 1.5em;
+}
+
+.schedule {
+  display: flex;
+  position: relative;
+  padding-left: 36px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 15%);
+
+  &.Reserved {
+    background: #f3c975;
+  }
+
+  &.Confirmed {
+    background: var(--gradient-primary);
+  }
+
+  &.Complete, &.Rated {
+    background: #8dca53;
+  }
+
+  &.Absent {
+    background: #fb8753;
+  }
+
+  &.Canceled {
+    background: #f44336;
+  }
+
+  .status {
+    width: 160px;
+    margin-left: -98px;
+    text-align: center;
+    align-self: center;
+    transform: rotate(270deg);
+    font-weight: bold;
+    position: absolute;
+    color: #fff;
+  }
+
+  .details {
+    background: #fff;
+    padding: 1em;
+    border-radius: 5px;
+    flex: 1;
+
+    p {
+      margin: 0;
+    }
+
+    .professional {
+      margin: 1em 0;
+    }
+
+    .establishment,
+    .professional {
+      label {
+        font-size: 0.8em;
+        font-weight: bold;
+      }
+
+      p {
+        font-weight: bold;
+        color: #000;
+      }
+    }
+
+    .professional label,
+    .date {
+      color: #909090;
+    }
+
+    .bottom-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mat-rating {
+      background-color: #fff5dd;
+      color: #f5ba45;
+      font-weight: bold;
+      border-radius: 18px;
+    }
+  }
+}

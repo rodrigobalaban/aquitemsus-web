@@ -1,0 +1,43 @@
+.padding {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .content {
+    margin: auto;
+  }
+}
+
+.page-title {
+  text-align: center;
+}
+
+.establishment {
+  text-align: center;
+}
+
+#stars {
+  display: flex;
+  justify-content: center;
+
+  .mat-star {
+    color: #f5ba45;
+  }
+}
+
+#comment {
+  display: flex;
+  flex-direction: column;
+}
+
+#submit {
+  display: flex;
+  justify-content: center;
+}
+
+.establishment,
+#stars,
+#comment,
+#submit {
+  margin-top: 1.5em;
+}

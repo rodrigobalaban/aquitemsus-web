@@ -1,0 +1,32 @@
+<div class="page-with-padding">
+  <div class="content">
+    <div class="padding">
+      <div id="user">
+        <div class="icon">
+          <mat-icon fontSet="material-icons-outlined">account_circle</mat-icon>
+        </div>
+        <div class="name">
+          <span>Olá,</span>
+          <h2>{{ user.name }}</h2>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <div id="profile-menu" class="menu-button">
+        <button mat-raised-button class="menu-option" [routerLink]="['meus-dados']">
+          Meus Dados
+        </button>
+        <button mat-raised-button class="menu-option" [routerLink]="['/agendamentos']">
+          Meus Agendamentos
+        </button>
+        <button mat-raised-button class="menu-option">
+          Alterar Senha
+        </button>
+        <button mat-raised-button class="menu-option" (click)="logout()">
+          Sair
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

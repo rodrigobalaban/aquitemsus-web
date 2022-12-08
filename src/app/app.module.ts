@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,17 @@ import { ScreenWithToolbarComponent } from './layout/screen-with-toolbar/screen-
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthTokenInterceptor } from './shared/http';
+
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
+
+import { registerLocaleData } from '@angular/common';
+import pt from '@angular/common/locales/pt';
+
+registerLocaleData(pt);
 
 @NgModule({
   declarations: [AppComponent, ScreenWithToolbarComponent],
@@ -18,8 +29,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    HttpClientModule,
     MatButtonModule,
     MatIconModule,
+    MatSnackBarModule,
     MatToolbarModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
@@ -28,7 +41,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthTokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

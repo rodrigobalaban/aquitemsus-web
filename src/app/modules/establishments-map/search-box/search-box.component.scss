@@ -15,6 +15,14 @@
     }
 }
 
-.establishment-icon {
-    margin-right: 0.5em;
+::ng-deep .mat-option {
+    .mat-option-text {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+
+        .category {
+            margin: 0;
+        }
+    }
 }

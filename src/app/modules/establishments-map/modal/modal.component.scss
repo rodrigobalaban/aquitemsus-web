@@ -14,7 +14,7 @@
         display: flex;
         flex-direction: row;
         gap: 1em;
-        margin-bottom: 2em;
+        margin-bottom: 1.25em;
 
         .title {
             font-weight: bold;
@@ -30,6 +30,15 @@
     a {
         color: #5485e5;
         text-decoration: none;
+    }
+
+    .opening-hours {
+        align-items: center;
+
+        .mat-expansion-panel {
+            width: 100%;
+            box-shadow: 0 3px 6px rgba($color: #000000, $alpha: 0.15);
+        }
     }
 }
 
@@ -81,4 +90,10 @@
 .loading {
     width: 60px;
     height: 60px;
+}
+
+.scheduling {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
 }

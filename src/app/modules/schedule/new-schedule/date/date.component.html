@@ -1,0 +1,5 @@
+<div id="dates" class="step">
+    <h2 class="selected-option professional">{{ professional.name }}</h2>
+    <h3 class="label">Selecione uma Data:</h3>
+    <mat-calendar [selected]="daySelected" [dateClass]="dateClass()" (selectedChange)="onSelecteDay($event)"></mat-calendar>
+</div>

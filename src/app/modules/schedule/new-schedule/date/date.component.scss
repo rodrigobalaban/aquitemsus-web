@@ -1,0 +1,11 @@
+::ng-deep .mat-calendar-body-cell:not(.mat-calendar-body-disabled) {
+  .mat-calendar-body-cell-content {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #418de4;
+  }
+
+  .mat-calendar-body-selected {
+    color: #fff;
+  }
+}

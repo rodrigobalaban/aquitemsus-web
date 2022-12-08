@@ -8,22 +8,38 @@ import { Localization } from 'src/app/shared';
   providedIn: 'any',
 })
 export class EstablishmentService {
+  moduleUrl = 'establishments';
+
   constructor(private httpClient: HttpClient) {}
 
-  getNearbyEstablishments(
+  getAllEstablishments(
+    search: string,
     localization: Localization,
-    distance: number
+    page: number,
+    pageSize: number
   ): Promise<Establishment[]> {
     return this.httpClient
       .get<Establishment[]>(
-        `${environment.apiUrl}/establishments?latitude=${localization.latitude}&longitude=${localization.longitude}&distance=${distance}`
+        `${environment.apiUrl}/${this.moduleUrl}?search=${search}&latitude=${localization.latitude}&longitude=${localization.longitude}&page=${page}&pagesize=${pageSize}`
+      )
+      .toPromise();
+  }
+
+  getNearbyEstablishments(
+    localization: Localization,
+    distance: number,
+    specialties: number[]
+  ): Promise<Establishment[]> {
+    return this.httpClient
+      .get<Establishment[]>(
+        `${environment.apiUrl}/${this.moduleUrl}/localization?latitude=${localization.latitude}&longitude=${localization.longitude}&distance=${distance}&specialties=${specialties}`
       )
       .toPromise();
   }
 
   getEstablishmentbyId(id: number): Promise<Establishment> {
     return this.httpClient
-      .get<Establishment>(`${environment.apiUrl}/establishments/${id}`)
+      .get<Establishment>(`${environment.apiUrl}/${this.moduleUrl}/${id}`)
       .toPromise();
   }
 

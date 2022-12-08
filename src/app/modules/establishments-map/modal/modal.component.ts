@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Establishment, Specialty } from 'src/app/shared';
 import { EstablishmentService } from '../services';
 
@@ -17,46 +18,48 @@ export class ModalComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private establishmentService: EstablishmentService
+    private _dialogRef: MatDialogRef<ModalComponent>,
+    private _establishmentService: EstablishmentService,
+    private _router: Router
   ) {
     this.getEstablishmentDetails(data.establishment);
   }
 
   async getEstablishmentDetails(establishment: Establishment): Promise<void> {
-    this.establishment = this.establishmentService.getEstablishmentbyId(
+    this.establishment = this._establishmentService.getEstablishmentbyId(
       establishment.id
     );
   }
 
-  getWeekdayDescription(dayOfWeek: number): string {
+  getWeekdayDescription(dayOfWeek: string): string {
     let dayDescription = '';
 
     switch (dayOfWeek) {
-      case 0: {
+      case 'Sunday': {
         dayDescription = 'Domingo';
         break;
       }
-      case 1: {
+      case 'Monday': {
         dayDescription = 'Segunda';
         break;
       }
-      case 2: {
+      case 'Tuesday': {
         dayDescription = 'Terça';
         break;
       }
-      case 3: {
+      case 'Wednesday': {
         dayDescription = 'Quarta';
         break;
       }
-      case 4: {
+      case 'Thursday': {
         dayDescription = 'Quinta';
         break;
       }
-      case 5: {
+      case 'Friday': {
         dayDescription = 'Sexta';
         break;
       }
-      case 6: {
+      case 'Saturday': {
         dayDescription = 'Sábado';
         break;
       }
@@ -84,5 +87,16 @@ export class ModalComponent {
     }
 
     return path;
+  }
+
+  scheduleAppointment(id: number): void {
+    this.closeDialog();
+    this._router.navigate(['agendamentos', 'novo'], {
+      queryParams: { estabelecimento: id },
+    });
+  }
+
+  closeDialog(): void {
+    this._dialogRef.close();
   }
 }

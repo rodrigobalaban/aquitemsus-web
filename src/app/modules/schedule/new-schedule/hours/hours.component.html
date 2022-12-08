@@ -1,0 +1,16 @@
+<div id="hours" class="step menu-button">
+  <h2 class="selected-option">{{ scheduleSession.professional!.name }}</h2>
+  <p>{{ toDate(scheduleSession.date!) | date: 'dd/MM/yyyy' }}</p>
+
+  <h3 class="label">Selecione um Horário:</h3>
+  <button mat-raised-button *ngFor="let schedule of schedules"
+    [ngClass]="{ 'selected' : scheduleSession.id == schedule.id }" class="menu-option" (click)="onSelectSchedule(schedule)">
+    {{ toDate(schedule.date!) | date: 'HH:mm' }}h.
+  </button>
+
+  <div *ngIf="scheduleSession.id" class="confirm-schedule">
+    <button type="button" mat-flat-button color="primary" class="button-primary" (click)="confirmSchedule()">
+      Confirmar Agendamento
+    </button>
+  </div>
+</div>
