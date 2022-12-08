@@ -5,11 +5,10 @@
 
   <footer>
     <mat-toolbar>
-      <button mat-icon-button [routerLink]="['/dashboard']" [routerLinkActive]="'active'"
-        [routerLinkActiveOptions]="{ exact: true }">
+      <button mat-icon-button [routerLink]="['/dashboard']" [routerLinkActive]="'active'">
         <mat-icon fontSet="material-icons-outlined">home</mat-icon>
       </button>
-      <button mat-icon-button [routerLink]="['/']" [routerLinkActive]="'active'">
+      <button mat-icon-button [routerLink]="['/']" [routerLinkActiveOptions]="{ exact: true }" [routerLinkActive]="'active'">
         <mat-icon fontSet="material-icons-outlined">map</mat-icon>
       </button>
       <button mat-fab id="search-button" color="primary" [routerLink]="['/']" [queryParams]="{search: true}">
