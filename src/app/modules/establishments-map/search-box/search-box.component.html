@@ -1,7 +1,7 @@
 <form id="search-box">
     <mat-form-field class="search-field" appearance="outline">
         <mat-label>Buscar...</mat-label>
-        <input matInput aria-label="Estabelecimento" [matAutocomplete]="auto" [formControl]="searchControl" />
+        <input #searchInput matInput aria-label="Estabelecimento" [matAutocomplete]="auto" [formControl]="searchControl" />
         <button *ngIf="searchControl.value" matSuffix mat-icon-button aria-label="Limpar" (click)="clearInput()">
             <mat-icon>close</mat-icon>
         </button>

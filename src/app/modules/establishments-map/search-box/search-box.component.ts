@@ -1,5 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import {
   Establishment,
@@ -13,20 +24,34 @@ import { EstablishmentService } from '../services';
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss'],
 })
-export class SearchBoxComponent implements OnInit {
+export class SearchBoxComponent implements AfterViewInit {
   @Input() localization!: Localization;
   @Output() onSelectEstablishment = new EventEmitter<Establishment>();
+
+  @ViewChild('searchInput') searchInput!: ElementRef;
 
   searchControl = new FormControl();
   filteredEstablishments: Establishment[] = [];
 
-  constructor(private establishmentService: EstablishmentService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private cdRef: ChangeDetectorRef,
+    private establishmentService: EstablishmentService
+  ) {
     this.searchControl.valueChanges
       .pipe(debounceTime(400), distinctUntilChanged())
       .subscribe((searchString) => this.filterEstablishments(searchString));
   }
 
-  ngOnInit(): void {}
+  ngAfterViewInit(): void {
+    const focusOnSearch = this.activatedRoute.snapshot.queryParams.search;
+
+    if (focusOnSearch) {
+      this.searchInput.nativeElement.focus();
+    }
+
+    this.cdRef.detectChanges();
+  }
 
   private async filterEstablishments(search: string): Promise<void> {
     this.filteredEstablishments =
