@@ -37,6 +37,11 @@ export class HomeComponent implements OnInit {
     this.showMapWithSpecialty(emergencyIds);
   }
 
+  searchUBSEstablishments() {
+    const ubsIds = [159];
+    this.showMapWithSpecialty(ubsIds);
+  }
+
   private showMapWithSpecialty(specialtiesIds: number[]) {
     let queryParams: Params = { specialties: specialtiesIds.join(',') };
 
