@@ -58,7 +58,7 @@ export class HoursComponent implements OnInit {
       );
 
       this._messageService.show('O agendamento foi realizado com sucesso!');
-      this._router.navigate(['/']);
+      this._router.navigate(['/dashboard']);
     } catch {
       this._messageService.show(
         'Houve um erro ao realizar o agendamento. Tente novamente mais tarde!'

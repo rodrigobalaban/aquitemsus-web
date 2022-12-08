@@ -10,17 +10,17 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        loadChildren: () =>
+          import('./modules/establishments-map').then(
+            (m) => m.EstablishmentsMapModule
+          ),
+      },
+      {
+        path: 'dashboard',
         canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/home').then(
             (m) => m.HomeModule
-          ),
-      },
-      {
-        path: 'mapa',
-        loadChildren: () =>
-          import('./modules/establishments-map').then(
-            (m) => m.EstablishmentsMapModule
           ),
       },
       {
