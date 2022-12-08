@@ -19,10 +19,10 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     let httpHeaders = {};
     const token = this._authService.token;    
 
-    if (token) {
-      httpHeaders = { Authorization: token, 'Content-Type': 'application/json' };
+    if (token === undefined) {
+      httpHeaders = { 'Content-Type': 'application/json' };      
     } else {
-      httpHeaders = { 'Content-Type': 'application/json' };
+      httpHeaders = { Authorization: token, 'Content-Type': 'application/json' };
     }
 
     const cloneRequest = request.clone({
